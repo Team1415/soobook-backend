@@ -1,0 +1,5 @@
+-- 카테고리 테이블 DDL
+CREATE TABLE category (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '카테고리아이디',
+  name VARCHAR(255) NOT NULL COMMENT '카테고리이름'
+) COMMENT '카테고리';
