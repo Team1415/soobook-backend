@@ -4,6 +4,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.graalvm.buildtools.native") version "0.9.23"
 	id("org.asciidoctor.jvm.convert") version "3.3.2"
+	id("org.flywaydb.flyway") version "9.20.0"
 }
 
 group = "com.team1415"
@@ -59,4 +60,15 @@ tasks.test {
 tasks.asciidoctor {
 	inputs.dir(snippetsDir)
 	dependsOn(tasks.test)
+}
+
+flyway {
+	url = "jdbc:mysql://localhost:3306/soobook-database?useSSL=false&allowPublicKeyRetrieval=true"
+	locations = arrayOf("filesystem:./src/main/resources/flyway/ddl", "filesystem:./src/main/resources/flyway/dml/local")
+	user = "root"
+	password = "verysecret"
+	schemas = arrayOf("soobook-database")
+	sqlMigrationSuffixes = arrayOf(".sql")
+	outOfOrder = true
+	baselineOnMigrate = true
 }
