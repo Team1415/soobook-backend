@@ -1,4 +1,3 @@
--- 책 테이블 DDL
 CREATE TABLE book (
   id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '책아이디',
   isbn VARCHAR(255) NOT NULL COMMENT '국제표준도서번호',
