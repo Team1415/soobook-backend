@@ -10,3 +10,11 @@ spring:
     url: jdbc:mysql://localhost:3306/soobook-database?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
     user: root
     password: verysecret
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600 # 데이터 유지 시간(sec)
+      cache-null-values: true # null 캐싱 여부
+      host: localhost
+      port: 6379
