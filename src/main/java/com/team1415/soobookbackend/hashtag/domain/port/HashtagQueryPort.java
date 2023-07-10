@@ -8,5 +8,6 @@ import java.util.List;
 @Port
 public interface HashtagQueryPort {
 
+    List<Hashtag> findAll();
     List<Hashtag> retrieveHashtagListByCategoryId(Long categoryId);
 }
