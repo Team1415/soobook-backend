@@ -19,6 +19,6 @@ public class CategoryQueryService {
 
     public List<CategoryResponseDto> retrieveCategoryList() {
 
-        return categoryDtoMapper.fromDomainToDto(categoryQueryPort.findAll());
+        return categoryDtoMapper.fromDomainToResponse(categoryQueryPort.findAll());
     }
 }

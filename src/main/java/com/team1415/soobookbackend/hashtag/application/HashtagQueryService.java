@@ -19,6 +19,6 @@ public class HashtagQueryService {
 
     public List<HashtagResponseDto> retrieveHashtagList() {
 
-        return hashtagDtoMapper.fromDomainToDto(hashtagQueryPort.findAll());
+        return hashtagDtoMapper.fromDomainToResponse(hashtagQueryPort.findAll());
     }
 }

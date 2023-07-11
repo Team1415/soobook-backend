@@ -6,8 +6,8 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface HashtagDtoMapper {
 
-    List<HashtagResponseDto> fromDomainToDto(List<Hashtag> hashtagList);
+    List<HashtagResponseDto> fromDomainToResponse(List<Hashtag> hashtagList);
 }
