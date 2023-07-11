@@ -1,3 +1,11 @@
 package com.team1415.soobookbackend.book.domain.port;
 
-public interface BookQueryPort {}
+import com.team1415.soobookbackend.book.domain.Book;
+import com.team1415.soobookbackend.common.annotation.Port;
+import java.util.List;
+
+@Port
+public interface BookQueryPort {
+
+    List<Book> retrieveNewestBookList();
+}
