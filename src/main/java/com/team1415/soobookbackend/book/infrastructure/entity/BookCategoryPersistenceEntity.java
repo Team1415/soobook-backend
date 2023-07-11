@@ -1,4 +1,4 @@
-package com.team1415.soobookbackend.category.infrastructure.model;
+package com.team1415.soobookbackend.book.infrastructure.entity;
 
 import com.team1415.soobookbackend.common.infrastructure.model.BasePersistenceEntity;
 import jakarta.persistence.Entity;
@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "category")
+@Table(name = "book_category_mapping")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CategoryPersistenceEntity extends BasePersistenceEntity {
+public class BookCategoryPersistenceEntity extends BasePersistenceEntity {
 
     @Id
     private Long id;
-    private String name;
+    private Long book_id;
+    private Long category_id;
 }
