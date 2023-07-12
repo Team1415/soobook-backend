@@ -6,8 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,14 +19,19 @@ public class BookPersistenceEntity extends BasePersistenceEntity {
     private String isbn10;
     private String isbn13;
     private String title;
-    private String publisher;
-    private Long price;
-    private Long salePrice;
-    private String status;
-    private LocalDateTime publishDatetime;
-    private String thumbnail;
-    @OneToMany(mappedBy = "bookPersistenceEntity")
-    private List<BookAuthorPersistenceEntity> bookAuthorPersistenceEntityList;
-    @OneToMany(mappedBy = "bookPersistenceEntity")
-    private List<BookTranslatorPersistenceEntity> bookTranslatorPersistenceEntityList;
+    @Embedded
+    private BookPublishPersistenceEntity bookPublishPersistenceEntity;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "book_author_mapping",
+            joinColumns = { @JoinColumn(name = "book_id") },
+            inverseJoinColumns = { @JoinColumn(name = "author_id") })
+    private Set<AuthorPersistenceEntity> authorPersistenceEntitySet;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "book_translator_mapping",
+            joinColumns = { @JoinColumn(name = "book_id") },
+            inverseJoinColumns = { @JoinColumn(name = "translator_id") })
+    private Set<TranslatorPersistenceEntity> translatorPersistenceEntitySet;
+
 }

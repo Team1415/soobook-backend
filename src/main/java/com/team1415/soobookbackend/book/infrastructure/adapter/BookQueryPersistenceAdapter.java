@@ -5,9 +5,10 @@ import com.team1415.soobookbackend.book.domain.port.BookQueryPort;
 import com.team1415.soobookbackend.book.infrastructure.entity.mapper.BookPersistenceMapper;
 import com.team1415.soobookbackend.book.infrastructure.repository.BookPersistenceRepository;
 import com.team1415.soobookbackend.common.annotation.Adapter;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 @Adapter
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class BookQueryPersistenceAdapter implements BookQueryPort {
     @Override
     public List<Book> retrieveNewestBookList() {
 
-        return mapper.fromEntityToDomain(repository.findAll(
+        return mapper.fromEntitysToDomainRoots(repository.findAll(
             Sort.by(Sort.Direction.DESC, "publishDatetime")));
     }
 }
