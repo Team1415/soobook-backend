@@ -15,6 +15,7 @@ import java.util.Set;
 public class BookPersistenceEntity extends BasePersistenceEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String isbn10;
     private String isbn13;

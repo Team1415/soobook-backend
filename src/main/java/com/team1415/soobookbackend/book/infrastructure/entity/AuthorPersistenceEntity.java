@@ -15,6 +15,7 @@ import java.util.Set;
 public class AuthorPersistenceEntity extends BasePersistenceEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String introduction;
