@@ -9,8 +9,8 @@ CREATE TABLE book (
   status VARCHAR(255) NOT NULL COMMENT '도서판매상태정보',
   publish_datetime TIMESTAMP NOT NULL COMMENT '도서출판날짜(ISO8601)',
   thumbnail VARCHAR(255) NOT NULL COMMENT '썸네일이미지URL',
-  created_by BIGINT NOT NULL COMMENT '작성자',
-  created_at TIMESTAMP NOT NULL COMMENT '작성일시',
+  created_by BIGINT NOT NULL COMMENT '생성자',
   modified_by BIGINT NOT NULL COMMENT '수정자',
+  created_at TIMESTAMP NOT NULL COMMENT '생성일시',
   modified_at TIMESTAMP NOT NULL COMMENT '수정일시'
 ) COMMENT '도서';
