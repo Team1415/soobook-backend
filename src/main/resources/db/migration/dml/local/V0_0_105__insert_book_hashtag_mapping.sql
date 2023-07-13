@@ -1,0 +1,2 @@
+INSERT INTO book_hashtag_mapping(book_id, hashtag_id, created_by, modified_by, created_at, modified_at) values (1, 1, 102108121, 102108121, NOW(), NOW());
+INSERT INTO book_hashtag_mapping(book_id, hashtag_id, created_by, modified_by, created_at, modified_at) values (1, 7, 102108121, 102108121, NOW(), NOW());

@@ -1,0 +1,1 @@
+INSERT INTO book_author_mapping(book_id, author_id, created_by, modified_by, created_at, modified_at) values (1, 1, 102108121, 102108121, NOW(), NOW());
