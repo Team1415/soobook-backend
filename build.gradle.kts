@@ -6,6 +6,7 @@ plugins {
   id("org.asciidoctor.jvm.convert") version "3.3.2"
   id("org.flywaydb.flyway") version "9.20.0"
   id("com.diffplug.spotless") version "6.19.0"
+  id("org.springdoc.openapi-gradle-plugin") version "1.6.0"
 }
 
 group = "com.team1415"
@@ -37,6 +38,8 @@ dependencies {
   implementation("org.flywaydb:flyway-core")
   implementation("org.flywaydb:flyway-mysql")
   implementation("org.mapstruct:mapstruct:1.5.5.Final")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
   compileOnly("org.projectlombok:lombok")
   developmentOnly("org.springframework.boot:spring-boot-devtools")
   developmentOnly("org.springframework.boot:spring-boot-docker-compose")
