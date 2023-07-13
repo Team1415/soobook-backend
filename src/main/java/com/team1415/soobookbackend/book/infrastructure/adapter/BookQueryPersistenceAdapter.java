@@ -21,6 +21,6 @@ public class BookQueryPersistenceAdapter implements BookQueryPort {
     public List<Book> retrieveNewestBookList() {
 
         return mapper.fromEntitysToDomainRoots(repository.findAll(
-            Sort.by(Sort.Direction.DESC, "publishDatetime")));
+            Sort.by(Sort.Direction.DESC, "bookPublishPersistenceEntity.publishDatetime")));
     }
 }
