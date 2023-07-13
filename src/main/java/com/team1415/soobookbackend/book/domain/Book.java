@@ -11,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 public class Book {
 
     private Long id;
-    private String isbn10;
-    private String isbn13;
+    private Long isbn10;
+    private Long isbn13;
     private String title;
     private BookPublish bookPublish;
 }
