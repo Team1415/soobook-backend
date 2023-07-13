@@ -25,6 +25,6 @@ public class HashtagQueryPersistenceAdapter implements HashtagQueryPort {
     @Override
     public List<Hashtag> retrieveHashtagListByCategoryId(Long categoryId) {
 
-        return mapper.fromEntityToDomain(repository.findAllByCategoryId(categoryId));
+        return mapper.fromEntityToDomain(repository.findByCategoryId(categoryId));
     }
 }

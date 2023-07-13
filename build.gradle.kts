@@ -65,6 +65,10 @@ tasks.asciidoctor {
   dependsOn(tasks.test)
 }
 
+tasks.withType<JavaCompile> {
+  options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
+}
+
 flyway {
   url = "jdbc:mysql://localhost:3306/soobook-database?useSSL=false&allowPublicKeyRetrieval=true"
   locations = arrayOf("filesystem:./src/main/resources/flyway/ddl", "filesystem:./src/main/resources/flyway/dml/local")
@@ -101,5 +105,4 @@ spotless {
     trimTrailingWhitespace()
     endWithNewline()
   }
-
 }

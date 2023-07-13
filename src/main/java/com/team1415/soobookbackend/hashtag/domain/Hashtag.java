@@ -10,6 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 public class Hashtag {
 
     private Long id;
-    private Long category_id;
+    private Long categoryId;
     private String name;
 }

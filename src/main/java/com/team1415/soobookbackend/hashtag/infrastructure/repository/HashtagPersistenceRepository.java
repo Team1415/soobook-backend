@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface HashtagPersistenceRepository extends JpaRepository<HashtagPersistenceEntity, Long> {
 
-    List<HashtagPersistenceEntity> findAllByCategoryId(Long categoryId);
+    List<HashtagPersistenceEntity> findByCategoryId(Long categoryId);
 }

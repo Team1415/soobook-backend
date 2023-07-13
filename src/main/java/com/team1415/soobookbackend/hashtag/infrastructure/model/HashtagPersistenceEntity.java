@@ -15,6 +15,6 @@ public class HashtagPersistenceEntity {
 
     @Id
     private Long id;
-    private Long category_id;
+    private Long categoryId;
     private String name;
 }
