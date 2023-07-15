@@ -15,6 +15,7 @@ public class BookHashtagPersistenceEntity extends BasePersistenceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long book_id;
     private Long hashtag_id;
 }

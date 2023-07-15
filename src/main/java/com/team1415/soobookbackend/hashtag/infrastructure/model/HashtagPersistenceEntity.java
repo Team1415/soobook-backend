@@ -14,6 +14,7 @@ public class HashtagPersistenceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long categoryId;
     private String name;
 }
