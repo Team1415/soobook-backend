@@ -1,9 +1,12 @@
 package com.team1415.soobookbackend.book.infrastructure.entity;
 
 import jakarta.persistence.Embeddable;
-import lombok.*;
-
 import java.time.LocalDateTime;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder

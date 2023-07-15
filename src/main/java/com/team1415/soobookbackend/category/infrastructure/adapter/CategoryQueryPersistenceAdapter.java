@@ -5,9 +5,8 @@ import com.team1415.soobookbackend.category.domain.port.CategoryQueryPort;
 import com.team1415.soobookbackend.category.infrastructure.model.mapper.CategoryPersistenceMapper;
 import com.team1415.soobookbackend.category.infrastructure.repository.CategoryPersistenceRepository;
 import com.team1415.soobookbackend.common.annotation.Adapter;
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Adapter
 @RequiredArgsConstructor
