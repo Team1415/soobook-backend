@@ -25,17 +25,23 @@ repositories {
   mavenCentral()
 }
 
+
 val snippetsDir by extra { file("build/generated-snippets") }
+val jwtVersion by extra { "0.11.5" }
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+  implementation("org.springframework.boot:spring-boot-starter-security")
   implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.apache.kafka:kafka-streams")
   implementation("org.flywaydb:flyway-core")
   implementation("org.flywaydb:flyway-mysql")
+  implementation ("io.jsonwebtoken:jjwt-api:$jwtVersion")
+  runtimeOnly("io.jsonwebtoken:jjwt-impl:$jwtVersion")
+  runtimeOnly("io.jsonwebtoken:jjwt-jackson:$jwtVersion")
   implementation("org.mapstruct:mapstruct:1.5.5.Final")
   compileOnly("org.projectlombok:lombok")
   developmentOnly("org.springframework.boot:spring-boot-devtools")
