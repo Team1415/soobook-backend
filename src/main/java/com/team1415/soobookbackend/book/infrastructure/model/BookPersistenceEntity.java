@@ -27,8 +27,8 @@ public class BookPersistenceEntity extends BasePersistenceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long isbn10;
-    private Long isbn13;
+    private String isbn10;
+    private String isbn13;
     private String title;
     @Embedded private BookPublishPersistenceEntity bookPublishPersistenceEntity;
 
