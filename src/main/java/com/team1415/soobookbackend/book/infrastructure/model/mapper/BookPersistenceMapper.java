@@ -1,10 +1,10 @@
-package com.team1415.soobookbackend.book.infrastructure.entity.mapper;
+package com.team1415.soobookbackend.book.infrastructure.model.mapper;
 
 import com.team1415.soobookbackend.book.domain.Book;
 import com.team1415.soobookbackend.book.domain.BookInformation;
 import com.team1415.soobookbackend.book.domain.BookPublish;
-import com.team1415.soobookbackend.book.infrastructure.entity.BookPersistenceEntity;
-import com.team1415.soobookbackend.book.infrastructure.entity.BookPublishPersistenceEntity;
+import com.team1415.soobookbackend.book.infrastructure.model.BookPersistenceEntity;
+import com.team1415.soobookbackend.book.infrastructure.model.BookPublishPersistenceEntity;
 import java.util.List;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;

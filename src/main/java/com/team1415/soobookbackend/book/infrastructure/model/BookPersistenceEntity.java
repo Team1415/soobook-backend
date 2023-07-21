@@ -1,4 +1,4 @@
-package com.team1415.soobookbackend.book.infrastructure.entity;
+package com.team1415.soobookbackend.book.infrastructure.model;
 
 import com.team1415.soobookbackend.common.infrastructure.model.BasePersistenceEntity;
 import jakarta.persistence.CascadeType;

@@ -1,4 +1,4 @@
-package com.team1415.soobookbackend.book.infrastructure.entity;
+package com.team1415.soobookbackend.book.infrastructure.model;
 
 import com.team1415.soobookbackend.common.infrastructure.model.BasePersistenceEntity;
 import jakarta.persistence.Entity;
@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "book_hashtag_mapping")
+@Table(name = "book_category_mapping")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class BookHashtagPersistenceEntity extends BasePersistenceEntity {
+public class BookCategoryPersistenceEntity extends BasePersistenceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long book_id;
-    private Long hashtag_id;
+    private Long bookId;
+    private Long categoryId;
 }

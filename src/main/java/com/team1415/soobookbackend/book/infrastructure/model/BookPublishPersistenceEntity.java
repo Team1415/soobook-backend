@@ -1,4 +1,4 @@
-package com.team1415.soobookbackend.book.infrastructure.entity;
+package com.team1415.soobookbackend.book.infrastructure.model;
 
 import jakarta.persistence.Embeddable;
 import java.time.LocalDateTime;
