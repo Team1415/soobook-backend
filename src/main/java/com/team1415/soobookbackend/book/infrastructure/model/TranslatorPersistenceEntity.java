@@ -1,25 +1,21 @@
 package com.team1415.soobookbackend.book.infrastructure.model;
 
 import com.team1415.soobookbackend.common.infrastructure.model.BasePersistenceEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import java.util.Set;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import java.util.Set;
 
 @Entity
 @Getter
+@SuperBuilder
 @Table(name = "translator")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class TranslatorPersistenceEntity extends BasePersistenceEntity {
 
     @Id
@@ -29,12 +25,11 @@ public class TranslatorPersistenceEntity extends BasePersistenceEntity {
     private String name;
     private String introduction;
 
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "book_translator_mapping",
-            joinColumns = {@JoinColumn(name = "translator_id")},
-            inverseJoinColumns = {@JoinColumn(name = "book_id")})
+    @ManyToMany(mappedBy = "translatorPersistenceEntitySet")
     private Set<BookPersistenceEntity> bookPersistenceEntitySet;
+
+    @SuppressWarnings(value = "java:S3252")
+    public static TranslatorPersistenceEntity createByBook(String name, String introduction) {
+        return TranslatorPersistenceEntity.builder().name(name).introduction(introduction).build();
+    }
 }
