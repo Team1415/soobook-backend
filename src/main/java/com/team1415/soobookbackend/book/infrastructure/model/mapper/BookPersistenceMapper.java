@@ -25,6 +25,7 @@ public interface BookPersistenceMapper {
     BookPublish fromEntityToValue(BookPublishPersistenceEntity bookPublishPersistenceEntity);
 
     @Named(value = "bookInformation")
+    @Mapping(source = "bookPersistenceEntity", target = "book", qualifiedByName = "book")
     @Mapping(
             source = "authorPersistenceEntitySet",
             target = "authorList",
