@@ -61,20 +61,30 @@ public class BookPersistenceEntity extends BasePersistenceEntity {
                 .isbn10(bookInformation.getBook().getIsbn10())
                 .isbn13(bookInformation.getBook().getIsbn13())
                 .title(bookInformation.getBook().getTitle())
-                .bookPublishPersistenceEntity(BookPublishPersistenceEntity.builder()
-                        .publisher(book.getBookPublish().publisher())
-                        .price(book.getBookPublish().price())
-                        .salePrice(book.getBookPublish().salePrice())
-                        .status(book.getBookPublish().status())
-                        .publishDatetime(book.getBookPublish().publishDatetime())
-                        .thumbnail(book.getBookPublish().thumbnail())
-                        .build())
-                .authorPersistenceEntitySet(authorList.stream().map(author ->
-                        AuthorPersistenceEntity.createByBook(author.getName(), author.getIntroduction()))
-                        .collect(Collectors.toSet()))
-                .translatorPersistenceEntitySet(translatorList.stream().map(translator ->
-                        TranslatorPersistenceEntity.createByBook(translator.getName(), translator.getIntroduction()))
-                        .collect(Collectors.toSet()))
+                .bookPublishPersistenceEntity(
+                        BookPublishPersistenceEntity.builder()
+                                .publisher(book.getBookPublish().publisher())
+                                .price(book.getBookPublish().price())
+                                .salePrice(book.getBookPublish().salePrice())
+                                .status(book.getBookPublish().status())
+                                .publishDatetime(book.getBookPublish().publishDatetime())
+                                .thumbnail(book.getBookPublish().thumbnail())
+                                .build())
+                .authorPersistenceEntitySet(
+                        authorList.stream()
+                                .map(
+                                        author ->
+                                                AuthorPersistenceEntity.createByBook(
+                                                        author.getName(), author.getIntroduction()))
+                                .collect(Collectors.toSet()))
+                .translatorPersistenceEntitySet(
+                        translatorList.stream()
+                                .map(
+                                        translator ->
+                                                TranslatorPersistenceEntity.createByBook(
+                                                        translator.getName(),
+                                                        translator.getIntroduction()))
+                                .collect(Collectors.toSet()))
                 .build();
     }
 }

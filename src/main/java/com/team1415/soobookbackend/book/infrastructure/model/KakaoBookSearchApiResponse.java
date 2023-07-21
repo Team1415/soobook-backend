@@ -10,11 +10,15 @@ public class KakaoBookSearchApiResponse {
 
     private String title;
     private String contents;
+
     @JsonProperty("url")
     private String bookDetailurl;
+
     private String isbn;
+
     @JsonProperty("datetime")
     private LocalDateTime publishDatetime;
+
     private String[] authors;
     private String publisher;
     private String[] translators;

@@ -17,7 +17,6 @@ public class Book {
     private String title;
     private BookPublish bookPublish;
 
-
     public static Book create(String isbn, String title, BookPublish bookPublish) {
         Book book = Book.builder().title(title).bookPublish(bookPublish).build();
         book.updateIsbn(isbn);
@@ -25,7 +24,8 @@ public class Book {
     }
 
     public void updateIsbn(String isbn) {
-        if (StringUtils.contains(isbn, " ") && ArrayUtils.getLength(StringUtils.split(isbn, " ")) == 2) {
+        if (StringUtils.contains(isbn, " ")
+                && ArrayUtils.getLength(StringUtils.split(isbn, " ")) == 2) {
             String[] splitedIsbn = StringUtils.split(isbn, " ");
             this.isbn10 = splitedIsbn[0];
             this.isbn13 = splitedIsbn[1];

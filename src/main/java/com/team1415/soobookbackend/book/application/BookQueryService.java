@@ -17,6 +17,7 @@ public class BookQueryService {
 
     public List<BookResponseDto> retrieveNewestBookList() {
 
-        return bookDtoMapper.fromDomainRootsToResponses(bookStorageQueryPort.retrieveNewestBookList());
+        return bookDtoMapper.fromDomainRootsToResponses(
+                bookStorageQueryPort.retrieveNewestBookList());
     }
 }

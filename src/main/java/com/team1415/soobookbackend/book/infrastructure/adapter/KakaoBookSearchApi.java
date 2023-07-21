@@ -29,10 +29,17 @@ public class KakaoBookSearchApi {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("Authorization", StringUtils.join("KakaoAK ", apiKey));
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL).queryParam("query", encodedQuery);
+        UriComponentsBuilder builder =
+                UriComponentsBuilder.fromHttpUrl(URL).queryParam("query", encodedQuery);
         HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
 
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, KakaoBookSearchApiResponse.class).getBody();
+        return restTemplate
+                .exchange(
+                        builder.toUriString(),
+                        HttpMethod.GET,
+                        entity,
+                        KakaoBookSearchApiResponse.class)
+                .getBody();
     }
 }
