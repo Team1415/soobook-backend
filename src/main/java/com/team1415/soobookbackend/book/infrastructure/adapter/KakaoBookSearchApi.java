@@ -1,6 +1,12 @@
 package com.team1415.soobookbackend.book.infrastructure.adapter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.team1415.soobookbackend.book.infrastructure.model.KakaoBookSearchApiResponse;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -10,9 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
+@Slf4j
 @Component
 public class KakaoBookSearchApi {
 
@@ -33,13 +37,18 @@ public class KakaoBookSearchApi {
                 UriComponentsBuilder.fromHttpUrl(URL).queryParam("query", encodedQuery);
         HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
 
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate
-                .exchange(
-                        builder.toUriString(),
-                        HttpMethod.GET,
-                        entity,
-                        KakaoBookSearchApiResponse.class)
-                .getBody();
+        Map responseBody =
+                new RestTemplate()
+                        .exchange(builder.toUriString(), HttpMethod.GET, entity, Map.class)
+                        .getBody();
+
+        KakaoBookSearchApiResponse kakaoBookSearchApiResponse =
+                new ObjectMapper()
+                        .registerModule(new JavaTimeModule())
+                        .convertValue(responseBody, KakaoBookSearchApiResponse.class);
+
+        log.info("book response : {}", kakaoBookSearchApiResponse.toString());
+
+        return kakaoBookSearchApiResponse;
     }
 }

@@ -1,29 +1,53 @@
 package com.team1415.soobookbackend.book.infrastructure.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.time.LocalDateTime;
+import lombok.Data;
 
 @Data
 public class KakaoBookSearchApiResponse {
 
-    private String title;
-    private String contents;
+    private Meta meta;
 
-    @JsonProperty("url")
-    private String bookDetailurl;
+    @JsonProperty("documents")
+    private Document[] documents;
 
-    private String isbn;
+    @Data
+    public static class Meta {
+        @JsonProperty("is_end")
+        boolean isEnd;
 
-    @JsonProperty("datetime")
-    private LocalDateTime publishDatetime;
+        @JsonProperty("pageable_count")
+        int pageableCount;
 
-    private String[] authors;
-    private String publisher;
-    private String[] translators;
-    private Integer price;
-    private Integer salePrice;
-    private String thumbnail;
-    private String status;
+        @JsonProperty("total_count")
+        int totalCount;
+    }
+
+    @Data
+    public static class Document {
+        private String title;
+        private String contents;
+
+        @JsonProperty("url")
+        private String bookDetailurl;
+
+        private String isbn;
+
+        @JsonProperty("datetime")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+        private LocalDateTime publishDatetime;
+
+        private String[] authors;
+        private String publisher;
+        private String[] translators;
+        private Integer price;
+
+        @JsonProperty("sale_price")
+        private Integer salePrice;
+
+        private String thumbnail;
+        private String status;
+    }
 }

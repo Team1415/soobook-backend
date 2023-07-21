@@ -1,14 +1,18 @@
 package com.team1415.soobookbackend.book.infrastructure.model;
 
 import com.team1415.soobookbackend.common.infrastructure.model.BasePersistenceEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.util.Set;
 
 @Entity
 @Getter
