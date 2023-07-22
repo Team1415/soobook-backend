@@ -1,2 +1,2 @@
-INSERT INTO author(name, introduction, created_by, modified_by, created_at, modified_at) values ('Klabnik Steve', '', 102108121, 102108121, NOW(), NOW());
-INSERT INTO author(name, introduction, created_by, modified_by, created_at, modified_at) values ('Nichols Carol', '', 102108121, 102108121, NOW(), NOW());
+INSERT INTO author(name, introduction, created_at, modified_at) values ('Klabnik Steve', '', NOW(), NOW());
+INSERT INTO author(name, introduction, created_at, modified_at) values ('Nichols Carol', '', NOW(), NOW());

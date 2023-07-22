@@ -1,6 +1,5 @@
 package com.team1415.soobookbackend.book.infrastructure.model;
 
-import com.team1415.soobookbackend.common.infrastructure.model.BasePersistenceEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "book_hashtag_mapping")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class BookHashtagPersistenceEntity extends BasePersistenceEntity {
+public class BookHashtagPersistenceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
