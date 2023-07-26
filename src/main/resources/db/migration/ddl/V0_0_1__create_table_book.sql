@@ -1,7 +1,7 @@
 CREATE TABLE book (
   id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '도서아이디',
-  isbn10 VARCHAR(10) COMMENT '국제표준도서번호10자리',
-  isbn13 VARCHAR(13) COMMENT '국제표준도서번호13자리',
+  isbn10 VARCHAR(10) NOT NULL COMMENT '국제표준도서번호10자리',
+  isbn13 VARCHAR(13) NOT NULL COMMENT '국제표준도서번호13자리',
   title VARCHAR(255) NOT NULL COMMENT '도서명',
   publisher VARCHAR(255) NOT NULL COMMENT '출판사',
   price BIGINT COMMENT '도서정가',
