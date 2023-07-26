@@ -4,5 +4,5 @@ public interface ApiErrorCode {
 
     int getCode();
 
-    int getMessage();
+    String getMessage();
 }
