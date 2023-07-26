@@ -9,9 +9,7 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,11 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class BasePersistenceEntity {
-
-    @JsonIgnore @NotNull @Column @CreatedBy private Long createdBy;
-
-    @JsonIgnore @NotNull @Column @LastModifiedBy private Long modifiedBy;
+public abstract class BasePersistenceEntity {
 
     @JsonIgnore
     @NotNull

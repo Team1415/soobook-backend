@@ -1,6 +1,5 @@
-package com.team1415.soobookbackend.book.infrastructure.entity;
+package com.team1415.soobookbackend.book.infrastructure.model;
 
-import com.team1415.soobookbackend.common.infrastructure.model.BasePersistenceEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,12 +13,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "book_category_mapping")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class BookCategoryPersistenceEntity extends BasePersistenceEntity {
+public class BookCategoryPersistenceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long book_id;
-    private Long category_id;
+    private Long bookId;
+    private Long categoryId;
 }
