@@ -1,5 +1,6 @@
 package com.team1415.soobookbackend.common.response;
 
+import com.team1415.soobookbackend.common.response.code.ApiResponseCode;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.Getter;
 public non-sealed class FailResponse implements ApiResponse {
 
     private final String apiVersion;
-    private final ApiErrorCode errorCode;
+    private final ApiResponseCode errorCode;
     private final String message;
 
     @Override
@@ -22,7 +23,7 @@ public non-sealed class FailResponse implements ApiResponse {
         return false;
     }
 
-    public static FailResponse of(ApiErrorCode errorCode, String message) {
+    public static FailResponse of(ApiResponseCode errorCode, String message) {
         return FailResponse.builder()
                 .apiVersion(DEFAULT_API_VERSION)
                 .errorCode(errorCode)

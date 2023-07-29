@@ -1,9 +1,9 @@
-package com.team1415.soobookbackend.common.response;
+package com.team1415.soobookbackend.common.response.code;
 
-public class ApiSuccessCode implements ApiErrorCode {
+public class ApiSuccessCode implements ApiResponseCode {
 
     public static final int SUCCESS_CODE = 200;
-    public static final String SUCCESS_MESSAGE = "성공적으로 처리하였습니다.";
+    public static final String SUCCESS_MESSAGE = "Success";
 
     @Override
     public int getCode() {
