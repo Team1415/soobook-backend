@@ -43,6 +43,9 @@ dependencies {
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
   implementation("org.apache.commons:commons-csv:1.10.0")
   implementation("org.apache.commons:commons-collections4:4.4")
+  implementation("commons-io:commons-io:2.13.0")
+  implementation("com.opencsv:opencsv:5.5")
+
 
   implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
   annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}")
