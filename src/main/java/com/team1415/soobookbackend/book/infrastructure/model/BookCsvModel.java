@@ -1,25 +1,23 @@
 package com.team1415.soobookbackend.book.infrastructure.model;
 
 import com.opencsv.bean.CsvBindByName;
-import com.team1415.soobookbackend.common.infrastructure.model.CsvConverter;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 @Data
-public class BookCsvModel implements CsvConverter {
+@NoArgsConstructor
+public class BookCsvModel {
 
-    public final String[] headers = {"대분류", "중분류", "도서명", "ISBN타입", "ISBN", "목차", "url"};
-    public final String type = "text/csv";
-
-    @CsvBindByName(column = "도서명")
+    @CsvBindByName(column = "BookName")
     private String bookName;
-    @CsvBindByName(column = "ISBN타입")
+    @CsvBindByName(column = "IsbnType")
     private String isbnType;
-    @CsvBindByName(column = "ISBN")
+    @CsvBindByName(column = "Isbn")
     private String isbn;
-    @CsvBindByName(column = "목차")
+    @CsvBindByName(column = "Index")
     private String bookIndex;
-    @CsvBindByName(column = "url")
+    @CsvBindByName(column = "Url")
     private String bookDetailUrl;
 
     @Override

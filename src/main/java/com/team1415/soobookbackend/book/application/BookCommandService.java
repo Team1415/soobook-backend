@@ -60,7 +60,7 @@ public class BookCommandService {
 
         // csv 파일 파싱
         List<BookDetail> bookDetailList = bookFileQueryPort.retrieveBookDetailList(file);
-
+        log.info("CSV : {}", bookDetailList);
         // csv파일 파싱결과 돌면서 후단 로직 처리
         for (BookDetail bookDetail : bookDetailList) {
             try {
