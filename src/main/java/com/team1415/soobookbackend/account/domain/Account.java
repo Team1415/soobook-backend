@@ -10,8 +10,7 @@ public record Account(
 ) {
 
     public record Provider(
-        String type,
-        String id
+        String type
     ) {
 
     }
