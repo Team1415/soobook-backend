@@ -7,7 +7,7 @@ import com.team1415.soobookbackend.book.domain.port.BookApiQueryPort;
 import com.team1415.soobookbackend.book.domain.port.BookFileQueryPort;
 import com.team1415.soobookbackend.book.domain.port.BookStorageCommandPort;
 import com.team1415.soobookbackend.book.domain.port.BookStorageQueryPort;
-import com.team1415.soobookbackend.book.domain.service.BookIdentificationHelper;
+import com.team1415.soobookbackend.common.exception.NoSuchBookException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,6 @@ public class BookCommandService {
     private final BookStorageCommandPort bookStorageCommandPort;
     private final BookStorageQueryPort bookStorageQueryPort;
     private final BookFileQueryPort bookFileQueryPort;
-    private final BookIdentificationHelper bookIdentificationHelper;
 
     public List<BookInformation> saveBookInformationList(List<String> queryList) {
 
@@ -67,7 +66,7 @@ public class BookCommandService {
             try {
                 BookInformation apiResponseBookInformation = bookApiQueryPort.retrieveBookInformationList(bookDetail.getExistIsbn())
                         .stream().filter(bookInformation -> bookInformation.equalsByTitleAndIsbn(bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13()))
-                        .findFirst().orElseThrow(() -> new RuntimeException());
+                        .findFirst().orElseThrow(() -> new NoSuchBookException(""));
 
                 BookInformation storageBookInformation = bookStorageQueryPort.retrieveBookInformationByTitleAndIsbn(bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13())
                         .orElseGet(() -> new BookInformation(apiResponseBookInformation.getBook(), apiResponseBookInformation.getAuthorList(), apiResponseBookInformation.getTranslatorList()));
