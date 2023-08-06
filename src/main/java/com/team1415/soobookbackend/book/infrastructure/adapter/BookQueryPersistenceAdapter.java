@@ -33,13 +33,13 @@ public class BookQueryPersistenceAdapter implements BookStorageQueryPort {
     @Override
     public List<BookInformation> retrieveBookInformationListByIsbn10(List<String> isbn10List) {
 
-        return mapper.fromEntitysToDomains(repository.findByIsbn10(isbn10List));
+        return mapper.fromEntitysToDomains(repository.findByIsbn10In(isbn10List));
     }
 
     @Override
     public List<BookInformation> retrieveBookInformationListByIsbn13(List<String> isbn13List) {
 
-        return mapper.fromEntitysToDomains(repository.findByIsbn13(isbn13List));
+        return mapper.fromEntitysToDomains(repository.findByIsbn13In(isbn13List));
     }
 
     @Override

@@ -10,8 +10,8 @@ import java.util.Optional;
 @Repository
 public interface BookPersistenceRepository extends JpaRepository<BookPersistenceEntity, Long>, BookQueryDslRepository {
 
-    List<BookPersistenceEntity> findByIsbn10(List<String> isbn10List);
-    List<BookPersistenceEntity> findByIsbn13(List<String> isbn13List);
+    List<BookPersistenceEntity> findByIsbn10In(List<String> isbn10List);
+    List<BookPersistenceEntity> findByIsbn13In(List<String> isbn13List);
     Optional<BookPersistenceEntity> findOneByTitleAndIsbn10(String title, String isbn10);
     Optional<BookPersistenceEntity> findOneByTitleAndIsbn13(String title, String isbn13);
 }
