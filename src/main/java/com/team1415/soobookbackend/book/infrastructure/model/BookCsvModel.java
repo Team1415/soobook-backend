@@ -1,32 +1,32 @@
 package com.team1415.soobookbackend.book.infrastructure.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.opencsv.bean.CsvBindByName;
 import com.team1415.soobookbackend.common.infrastructure.model.CsvConverter;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 @Data
-public class BookCsvConverter implements CsvConverter {
+public class BookCsvModel implements CsvConverter {
 
     public final String[] headers = {"대분류", "중분류", "도서명", "ISBN타입", "ISBN", "목차", "url"};
     public final String type = "text/csv";
 
-    @JsonProperty("도서명")
+    @CsvBindByName(column = "도서명")
     private String bookName;
-    @JsonProperty("ISBN타입")
+    @CsvBindByName(column = "ISBN타입")
     private String isbnType;
-    @JsonProperty("ISBN")
+    @CsvBindByName(column = "ISBN")
     private String isbn;
-    @JsonProperty("목차")
+    @CsvBindByName(column = "목차")
     private String bookIndex;
-    @JsonProperty("url")
+    @CsvBindByName(column = "url")
     private String bookDetailUrl;
 
     @Override
     public boolean equals(Object object) {
-        if (object instanceof BookCsvConverter bookCsvConverter) {
-            return Boolean.logicalAnd(StringUtils.equals(bookCsvConverter.getIsbnType(), isbnType),
-                    StringUtils.equals(bookCsvConverter.getIsbn(), isbn));
+        if (object instanceof BookCsvModel bookCsvModel) {
+            return Boolean.logicalAnd(StringUtils.equals(bookCsvModel.getIsbnType(), isbnType),
+                    StringUtils.equals(bookCsvModel.getIsbn(), isbn));
         } else {
             return false;
         }
