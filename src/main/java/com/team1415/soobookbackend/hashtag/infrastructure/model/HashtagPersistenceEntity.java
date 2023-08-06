@@ -1,6 +1,8 @@
 package com.team1415.soobookbackend.hashtag.infrastructure.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -14,7 +16,9 @@ import lombok.NoArgsConstructor;
 public class HashtagPersistenceEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long category_id;
+
+    private Long categoryId;
     private String name;
 }

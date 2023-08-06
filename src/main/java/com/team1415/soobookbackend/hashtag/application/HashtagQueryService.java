@@ -3,11 +3,10 @@ package com.team1415.soobookbackend.hashtag.application;
 import com.team1415.soobookbackend.hashtag.domain.port.HashtagQueryPort;
 import com.team1415.soobookbackend.hashtag.dto.HashtagResponseDto;
 import com.team1415.soobookbackend.hashtag.dto.mapper.HashtagDtoMapper;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
@@ -19,6 +18,6 @@ public class HashtagQueryService {
 
     public List<HashtagResponseDto> retrieveHashtagList() {
 
-        return hashtagDtoMapper.fromDomainToDto(hashtagQueryPort.findAll());
+        return hashtagDtoMapper.fromDomainToResponse(hashtagQueryPort.findAll());
     }
 }

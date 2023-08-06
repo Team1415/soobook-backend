@@ -1,0 +1,1 @@
+INSERT INTO book_author_mapping(book_id, author_id) values (1, 1);

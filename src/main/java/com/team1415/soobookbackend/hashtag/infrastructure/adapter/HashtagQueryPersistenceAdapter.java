@@ -5,9 +5,8 @@ import com.team1415.soobookbackend.hashtag.domain.Hashtag;
 import com.team1415.soobookbackend.hashtag.domain.port.HashtagQueryPort;
 import com.team1415.soobookbackend.hashtag.infrastructure.model.mapper.HashtagPersistenceMapper;
 import com.team1415.soobookbackend.hashtag.infrastructure.repository.HashtagPersistenceRepository;
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Adapter
 @RequiredArgsConstructor
@@ -25,6 +24,6 @@ public class HashtagQueryPersistenceAdapter implements HashtagQueryPort {
     @Override
     public List<Hashtag> retrieveHashtagListByCategoryId(Long categoryId) {
 
-        return mapper.fromEntityToDomain(repository.findAllByCategoryId(categoryId));
+        return mapper.fromEntityToDomain(repository.findByCategoryId(categoryId));
     }
 }

@@ -1,0 +1,1 @@
+INSERT INTO book_category_mapping(book_id, category_id) values (1, 1);
