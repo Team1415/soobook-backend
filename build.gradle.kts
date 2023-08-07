@@ -45,7 +45,7 @@ dependencies {
   implementation("org.apache.commons:commons-collections4:4.4")
   implementation("commons-io:commons-io:2.13.0")
   implementation("com.opencsv:opencsv:5.5")
-
+  implementation("com.github.ozlerhakan:poiji:4.1.1")
 
   implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
   annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}")
