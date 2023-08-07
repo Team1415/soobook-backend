@@ -2,19 +2,20 @@ package com.team1415.soobookbackend.book.infrastructure.adapter;
 
 import com.team1415.soobookbackend.book.domain.BookDetail;
 import com.team1415.soobookbackend.book.domain.port.BookFileQueryPort;
-import com.team1415.soobookbackend.book.infrastructure.model.BookCsvModel;
+import com.team1415.soobookbackend.book.infrastructure.model.BookExcelModel;
 import com.team1415.soobookbackend.common.annotation.Adapter;
 import com.team1415.soobookbackend.common.infrastructure.adapter.MultipartFileConvertAdapter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
+@Slf4j
 @Adapter
 @RequiredArgsConstructor
-public class BookCsvReaderAdapter implements BookFileQueryPort {
+public class BookFileReaderAdapter implements BookFileQueryPort {
 
     private final MultipartFileConvertAdapter multipartFileConvertAdapter;
 
@@ -22,8 +23,9 @@ public class BookCsvReaderAdapter implements BookFileQueryPort {
     public List<BookDetail> retrieveBookDetailList(MultipartFile file) {
 
         try {
-            List<BookCsvModel> bookCsvModelList = multipartFileConvertAdapter.toPojo(file, BookCsvModel.class);
-            return bookCsvModelList.stream().map(bookCsvModel ->
+            List<BookExcelModel> bookExcelModelList = multipartFileConvertAdapter.toPojo(file, BookExcelModel.class);
+            log.info("Csv Convert Result : {}", bookExcelModelList);
+            return bookExcelModelList.stream().map(bookCsvModel ->
                 BookDetail.create(bookCsvModel.getIsbnType(), bookCsvModel.getIsbn(), bookCsvModel.getBookName(),
                         bookCsvModel.getBookIndex(), bookCsvModel.getBookDetailUrl())).toList();
         } catch (Exception e) {

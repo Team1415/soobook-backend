@@ -29,6 +29,7 @@ public class BookCommandService {
     private final BookStorageQueryPort bookStorageQueryPort;
     private final BookFileQueryPort bookFileQueryPort;
 
+    @Transactional
     public List<BookInformation> saveBookInformationList(List<String> queryList) {
 
         List<BookInformation> savedBookInfomationList = new ArrayList<>();
@@ -60,9 +61,10 @@ public class BookCommandService {
 
         // csv 파일 파싱
         List<BookDetail> bookDetailList = bookFileQueryPort.retrieveBookDetailList(file);
-        log.info("CSV : {}", bookDetailList);
+
         // csv파일 파싱결과 돌면서 후단 로직 처리
         for (BookDetail bookDetail : bookDetailList) {
+            log.info("도서명 : {} 저장 처리 시작", bookDetail.getTitle());
             try {
                 BookInformation apiResponseBookInformation = bookApiQueryPort.retrieveBookInformationList(bookDetail.getExistIsbn())
                         .stream().filter(bookInformation -> bookInformation.equalsByTitleAndIsbn(bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13()))
@@ -93,8 +95,8 @@ public class BookCommandService {
                         bookStorageCommandPort.updateDetail(bookDetail);
                     }
                 }
-            } catch (RuntimeException e) {
-                log.error("ISBN 이상함");
+            } catch (Exception e) {
+                log.error("Book 저장 실패. Causes : {}", e.getCause().toString());
             }
         }
     }

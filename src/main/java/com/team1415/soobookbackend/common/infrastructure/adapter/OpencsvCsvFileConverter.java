@@ -2,6 +2,7 @@ package com.team1415.soobookbackend.common.infrastructure.adapter;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,8 +12,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+@Slf4j
 @Component
-public class CsvFileConverter implements MultipartFileConverter {
+public class OpencsvCsvFileConverter implements MultipartFileConverter {
 
     private static final String MATCHING_EXTENSION = "csv";
 
@@ -21,6 +23,7 @@ public class CsvFileConverter implements MultipartFileConverter {
         try {
             final BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
 
+            log.info("reader : {}", reader.lines().toList());
             return new CsvToBeanBuilder<T>(reader)
                     .withType(clazz)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
