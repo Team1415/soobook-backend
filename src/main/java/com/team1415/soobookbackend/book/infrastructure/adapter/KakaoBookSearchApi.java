@@ -43,13 +43,8 @@ public class KakaoBookSearchApi {
                         .exchange(builder.toUriString(), HttpMethod.GET, entity, Map.class)
                         .getBody();
 
-        KakaoBookSearchApiResponse kakaoBookSearchApiResponse =
-                new ObjectMapper()
-                        .registerModule(new JavaTimeModule())
-                        .convertValue(responseBody, KakaoBookSearchApiResponse.class);
-
-        log.info("book response : {}", kakaoBookSearchApiResponse.toString());
-
-        return kakaoBookSearchApiResponse;
+        return new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .convertValue(responseBody, KakaoBookSearchApiResponse.class);
     }
 }

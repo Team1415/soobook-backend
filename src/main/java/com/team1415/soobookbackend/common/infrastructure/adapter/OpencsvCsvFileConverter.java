@@ -23,7 +23,6 @@ public class OpencsvCsvFileConverter implements MultipartFileConverter {
         try {
             final BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
 
-            log.info("reader : {}", reader.lines().toList());
             return new CsvToBeanBuilder<T>(reader)
                     .withType(clazz)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.BOTH)
