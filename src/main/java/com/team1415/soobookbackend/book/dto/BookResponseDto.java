@@ -1,16 +1,17 @@
 package com.team1415.soobookbackend.book.dto;
 
-import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Builder
 public class BookResponseDto {
 
     private Long id;
-    private Long isbn10;
-    private Long isbn13;
+    private String isbn10;
+    private String isbn13;
     private String title;
     private String publisher;
     private Long price;

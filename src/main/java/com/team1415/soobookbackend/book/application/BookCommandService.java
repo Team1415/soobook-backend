@@ -93,13 +93,13 @@ public class BookCommandService {
                     storageBookInformation = bookStorageCommandPort.update(apiResponseBookInformation);
                 }
 
-                bookDetail.updateBookId(storageBookInformation.getBook().getId());
-                if (Boolean.FALSE.equals(bookStorageQueryPort.retrieveBookDetailByTitleAndIsbn(bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13()).isPresent())) {
+                BookDetail storageBookDetail = bookStorageQueryPort.retrieveBookDetailByTitleAndIsbn(
+                        bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13()).orElse(bookDetail);
+
+                if (ObjectUtils.isEmpty(storageBookDetail.getBookId())) {
+                    bookDetail.updateBookId(storageBookInformation.getBook().getId());
                     bookStorageCommandPort.insertDetail(bookDetail);
                 } else {
-                    BookDetail storageBookDetail = bookStorageQueryPort.retrieveBookDetailByTitleAndIsbn(bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13())
-                            .get();
-
                     if (Boolean.FALSE.equals(StringUtils.equals(bookDetail.getUrl(), storageBookDetail.getUrl()))) {
                         bookStorageCommandPort.insertDetail(bookDetail);
                     } else {
