@@ -12,6 +12,8 @@ plugins {
 group = "com.team1415"
 version = "0.0.1-SNAPSHOT"
 
+val queryDslVersion = "5.0.0"
+
 java {
   sourceCompatibility = JavaVersion.VERSION_17
 }
@@ -37,15 +39,27 @@ dependencies {
   implementation("org.apache.kafka:kafka-streams")
   implementation("org.flywaydb:flyway-core")
   implementation("org.flywaydb:flyway-mysql")
-  implementation("org.mapstruct:mapstruct:1.5.5.Final")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
+  implementation("org.apache.commons:commons-csv:1.10.0")
+  implementation("org.apache.commons:commons-collections4:4.4")
+  implementation("commons-io:commons-io:2.13.0")
+  implementation("com.opencsv:opencsv:5.5")
+  implementation("com.github.ozlerhakan:poiji:4.1.1")
+
+  implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
+  annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}")
+
   compileOnly("org.projectlombok:lombok")
+  annotationProcessor("org.projectlombok:lombok")
+
+  implementation("org.mapstruct:mapstruct:1.5.5.Final")
+  annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+
+  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
   developmentOnly("org.springframework.boot:spring-boot-devtools")
   developmentOnly("org.springframework.boot:spring-boot-docker-compose")
   runtimeOnly("com.mysql:mysql-connector-j")
-  annotationProcessor("org.projectlombok:lombok")
-  annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.boot:spring-boot-testcontainers")
   testImplementation("io.projectreactor:reactor-test")

@@ -22,7 +22,7 @@ public class Book {
         return book;
     }
 
-    public void updateIsbn(String isbn) {
+    private void updateIsbn(String isbn) {
         if (Boolean.FALSE.equals(StringUtils.contains(isbn, " "))) {
             return;
         }

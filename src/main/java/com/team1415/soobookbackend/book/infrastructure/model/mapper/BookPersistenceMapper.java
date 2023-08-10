@@ -1,15 +1,18 @@
 package com.team1415.soobookbackend.book.infrastructure.model.mapper;
 
 import com.team1415.soobookbackend.book.domain.Book;
+import com.team1415.soobookbackend.book.domain.BookDetail;
 import com.team1415.soobookbackend.book.domain.BookInformation;
 import com.team1415.soobookbackend.book.domain.BookPublish;
+import com.team1415.soobookbackend.book.infrastructure.model.BookDetailPersistenceEntity;
 import com.team1415.soobookbackend.book.infrastructure.model.BookPersistenceEntity;
 import com.team1415.soobookbackend.book.infrastructure.model.BookPublishPersistenceEntity;
-import java.util.List;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+
+import java.util.List;
 
 @Mapper(uses = {AuthorPersistenceMapper.class, TranslatorPersistenceMapper.class})
 public interface BookPersistenceMapper {
@@ -35,6 +38,8 @@ public interface BookPersistenceMapper {
             target = "translatorList",
             qualifiedByName = "translatorList")
     BookInformation fromEntityToDomain(BookPersistenceEntity bookPersistenceEntity);
+
+    BookDetail fromEntityToDomainDetail(BookDetailPersistenceEntity bookDetailPersistenceEntity);
 
     @IterableMapping(qualifiedByName = {"book"})
     List<Book> fromEntitysToDomainRoots(List<BookPersistenceEntity> bookPersistenceEntityList);
