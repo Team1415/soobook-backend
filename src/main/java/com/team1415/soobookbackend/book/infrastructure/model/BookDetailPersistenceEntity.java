@@ -21,14 +21,17 @@ public class BookDetailPersistenceEntity extends BasePersistenceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long bookId;
-    private String bookIndex;
+    private String source;
     private String url;
+    private String bookIndex;
+
 
     public static BookDetailPersistenceEntity create(BookDetail bookDetail) {
         return BookDetailPersistenceEntity.builder()
                 .bookId(bookDetail.getBookId())
-                .bookIndex(bookDetail.getBookIndex())
+                .source(bookDetail.getSource())
                 .url(bookDetail.getUrl())
+                .bookIndex(bookDetail.getBookIndex())
                 .build();
     }
 
