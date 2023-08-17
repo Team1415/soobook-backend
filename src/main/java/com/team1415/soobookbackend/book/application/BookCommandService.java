@@ -7,6 +7,8 @@ import com.team1415.soobookbackend.book.domain.port.BookApiQueryPort;
 import com.team1415.soobookbackend.book.domain.port.BookFileQueryPort;
 import com.team1415.soobookbackend.book.domain.port.BookStorageCommandPort;
 import com.team1415.soobookbackend.book.domain.port.BookStorageQueryPort;
+import com.team1415.soobookbackend.book.dto.BookInformationResponseDto;
+import com.team1415.soobookbackend.book.dto.mapper.BookDtoMapper;
 import com.team1415.soobookbackend.common.exception.NoSuchBookException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +31,10 @@ public class BookCommandService {
     private final BookStorageCommandPort bookStorageCommandPort;
     private final BookStorageQueryPort bookStorageQueryPort;
     private final BookFileQueryPort bookFileQueryPort;
+    private final BookDtoMapper bookDtoMapper;
 
     @Transactional
-    public List<BookInformation> saveBookInformationList(List<String> queryList) {
+    public List<BookInformationResponseDto> saveBookInformationList(List<String> queryList) {
 
         List<BookInformation> savedBookInfomationList = new ArrayList<>();
 
@@ -44,7 +47,7 @@ public class BookCommandService {
             }
         }
 
-        return savedBookInfomationList;
+        return bookDtoMapper.fromDomainsToResponses(savedBookInfomationList);
     }
 
     private BookInformation saveBookInformation(BookInformation bookInformation) {

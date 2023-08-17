@@ -2,6 +2,7 @@ package com.team1415.soobookbackend.book.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.team1415.soobookbackend.common.constant.BookDetailSource;
 import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
@@ -18,11 +19,14 @@ public class BookDetail {
     private String isbn13;
     @JsonIgnore
     private String title;
-    private String bookIndex;
+    private String source;
     private String url;
+    private String bookIndex;
+
 
     public static BookDetail create(String isbnType, String isbn, String title, String bookIndex, String url) {
-        BookDetail bookDetail = BookDetail.builder().title(title).bookIndex(bookIndex).url(url).build();
+        BookDetail bookDetail = BookDetail.builder().title(title).source(BookDetailSource.getMatchedSourceByUrl(url))
+                .url(url).bookIndex(bookIndex).build();
         bookDetail.updateIsbn(isbnType, isbn);
         return bookDetail;
     }
