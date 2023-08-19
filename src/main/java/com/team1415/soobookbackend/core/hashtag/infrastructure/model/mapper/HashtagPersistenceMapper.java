@@ -5,7 +5,7 @@ import com.team1415.soobookbackend.core.hashtag.infrastructure.model.HashtagPers
 import java.util.List;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface HashtagPersistenceMapper {
 
     List<Hashtag> fromEntityToDomain(List<HashtagPersistenceEntity> hashtagPersistenceEntityList);

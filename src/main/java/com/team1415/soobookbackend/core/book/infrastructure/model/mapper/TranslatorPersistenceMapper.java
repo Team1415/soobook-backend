@@ -8,7 +8,7 @@ import java.util.Set;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TranslatorPersistenceMapper {
 
     @Named(value = "translator")

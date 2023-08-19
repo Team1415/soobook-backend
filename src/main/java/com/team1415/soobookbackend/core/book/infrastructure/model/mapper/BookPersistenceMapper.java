@@ -14,7 +14,8 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(uses = {AuthorPersistenceMapper.class, TranslatorPersistenceMapper.class})
+@Mapper(componentModel = "spring",
+        uses = {AuthorPersistenceMapper.class, TranslatorPersistenceMapper.class})
 public interface BookPersistenceMapper {
 
     @Named(value = "book")

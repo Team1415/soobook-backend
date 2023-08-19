@@ -1,19 +1,14 @@
 package com.team1415.soobookbackend.core.book.infrastructure.model.mapper;
 
-import com.team1415.soobookbackend.core.book.domain.Author;
-import com.team1415.soobookbackend.core.book.domain.Book;
-import com.team1415.soobookbackend.core.book.domain.BookInformation;
-import com.team1415.soobookbackend.core.book.domain.BookPublish;
-import com.team1415.soobookbackend.core.book.domain.Translator;
+import com.team1415.soobookbackend.core.book.domain.*;
 import com.team1415.soobookbackend.core.book.infrastructure.model.KakaoBookSearchApiResponse.Document;
-import java.util.List;
-import java.util.stream.Stream;
-
-import jdk.jfr.Name;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 
-@Mapper
+import java.util.List;
+import java.util.stream.Stream;
+
+@Mapper(componentModel = "spring")
 public interface BookRestMapper {
 
     @Named("book")
@@ -21,7 +16,7 @@ public interface BookRestMapper {
         return Book.create(document.getIsbn(), document.getTitle(), this.toValue(document));
     }
 
-    @Name("bookPublish")
+    @Named("bookPublish")
     BookPublish toValue(Document document);
 
     default BookInformation toDomain(Document document) {
