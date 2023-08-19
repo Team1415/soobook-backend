@@ -5,6 +5,8 @@ import com.team1415.soobookbackend.account.application.AccountCommandService;
 import com.team1415.soobookbackend.account.application.AccountQueryService;
 import com.team1415.soobookbackend.account.application.command.AccountCommand;
 import com.team1415.soobookbackend.account.domain.Account;
+import com.team1415.soobookbackend.security.domain.AccountContext;
+import com.team1415.soobookbackend.security.domain.OAuth2Account;
 import com.team1415.soobookbackend.security.domain.OAuth2Provider;
 import com.team1415.soobookbackend.security.domain.OAuth2UserAccount;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ public class OAuth2UserAccountService implements OAuth2UserService<OAuth2UserReq
         final var oAuth2UserAccount = OAuth2UserAccount.of(oAuth2Provider, oAuth2User);
 
         final var account = getOrCreateAccount(oAuth2UserAccount);
+        return OAuth2Account.of(oAuth2User, AccountContext.from(account));
     }
 
     private Account getOrCreateAccount(OAuth2UserAccount oAuth2UserAccount) {
