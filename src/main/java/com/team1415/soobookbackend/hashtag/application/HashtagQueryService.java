@@ -16,8 +16,8 @@ public class HashtagQueryService {
     private final HashtagQueryPort hashtagQueryPort;
     private final HashtagDtoMapper hashtagDtoMapper;
 
-    public List<HashtagResponseDto> retrieveHashtagList() {
+    public List<HashtagResponseDto> retrieveHashtagListOfCategory(Long categoryId) {
 
-        return hashtagDtoMapper.fromDomainToResponse(hashtagQueryPort.findAll());
+        return hashtagDtoMapper.fromDomainToResponse(hashtagQueryPort.retrieveHashtagListByCategoryId(categoryId));
     }
 }
