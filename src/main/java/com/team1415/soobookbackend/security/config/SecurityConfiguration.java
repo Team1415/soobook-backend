@@ -1,10 +1,9 @@
 package com.team1415.soobookbackend.security.config;
 
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-
 import com.team1415.soobookbackend.account.application.AccountCommandService;
 import com.team1415.soobookbackend.account.application.AccountQueryService;
 import com.team1415.soobookbackend.security.application.OAuth2UserAccountService;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -23,12 +22,15 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 @EnableWebSecurity
 @EnableMethodSecurity
+@AllArgsConstructor
 public class SecurityConfiguration {
 
-    private AccountCommandService accountCommandService;
-    private AccountQueryService accountQueryService;
+    private final AccountCommandService accountCommandService;
+    private final AccountQueryService accountQueryService;
 
     @Bean
     @Order(1)
