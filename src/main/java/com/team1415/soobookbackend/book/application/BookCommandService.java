@@ -96,8 +96,9 @@ public class BookCommandService {
                     storageBookInformation = bookStorageCommandPort.update(apiResponseBookInformation);
                 }
 
-                BookDetail storageBookDetail = bookStorageQueryPort.retrieveBookDetailByTitleAndIsbn(
-                        bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13()).orElse(bookDetail);
+                BookDetail storageBookDetail = bookStorageQueryPort.retrieveBookDetailByTitleAndIsbnAndUrl(
+                        bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13(), bookDetail.getUrl())
+                        .orElse(bookDetail);
 
                 if (ObjectUtils.isEmpty(storageBookDetail.getBookId())) {
                     bookDetail.updateBookId(storageBookInformation.getBook().getId());

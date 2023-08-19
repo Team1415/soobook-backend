@@ -4,6 +4,7 @@ import com.team1415.soobookbackend.book.application.BookCommandService;
 import com.team1415.soobookbackend.book.application.BookQueryService;
 import com.team1415.soobookbackend.book.dto.BookInformationResponseDto;
 import com.team1415.soobookbackend.book.dto.BookResponseDto;
+import com.team1415.soobookbackend.book.dto.RetrieveBookRequestDto;
 import com.team1415.soobookbackend.book.dto.SaveBookInformationRequestDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,9 @@ public class BookController {
     private final BookQueryService bookQueryService;
     private final BookCommandService bookCommandService;
 
-    @GetMapping("/books/newest")
-    public List<BookResponseDto> retrieveNewestBookList() {
+    @GetMapping("/books")
+    public List<BookResponseDto> retrieveNewestBookList(@ModelAttribute RetrieveBookRequestDto retrieveBookRequestDto) {
+
         return bookQueryService.retrieveNewestBookList();
     }
 

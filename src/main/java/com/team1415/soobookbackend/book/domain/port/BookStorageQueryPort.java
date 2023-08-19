@@ -15,7 +15,7 @@ public interface BookStorageQueryPort {
     List<BookInformation> retrieveBookInformationListByIsbn10(List<String> isbn10List);
     List<BookInformation> retrieveBookInformationListByIsbn13(List<String> isbn13List);
     Optional<BookInformation> retrieveBookInformationByTitleAndIsbn(String title, String isbn10, String isbn13);
-    Optional<BookDetail> retrieveBookDetailByTitleAndIsbn(String title, String isbn10, String isbn13);
+    Optional<BookDetail> retrieveBookDetailByTitleAndIsbnAndUrl(String title, String isbn10, String isbn13, String url);
 
     boolean isExistBook(String title, String isbn10, String isbn13);
 }
