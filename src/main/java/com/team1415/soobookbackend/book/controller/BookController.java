@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -24,9 +25,9 @@ public class BookController {
     private final BookCommandService bookCommandService;
 
     @GetMapping("/books")
-    public List<BookResponseDto> retrieveNewestBookList(@ModelAttribute RetrieveBookRequestDto retrieveBookRequestDto) {
+    public List<BookResponseDto> retrieveBookList(@ModelAttribute RetrieveBookRequestDto retrieveBookRequestDto) {
 
-        return bookQueryService.retrieveNewestBookList();
+        return new ArrayList<>(); // bookQueryService.retrieveBookList();
     }
 
     @PostMapping("/books")

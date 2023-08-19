@@ -1,13 +1,11 @@
 package com.team1415.soobookbackend.book.infrastructure.repository;
 
-import com.team1415.soobookbackend.book.domain.BookDetail;
-import com.team1415.soobookbackend.book.domain.BookInformation;
+import com.team1415.soobookbackend.book.dto.RetrieveBookRequestDto;
+import com.team1415.soobookbackend.book.infrastructure.model.BookPersistenceEntity;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface BookQueryDslRepository {
 
-    Optional<BookInformation> retrieveByTitleAndIsbn(String title, String isbn10, String isbn13);
-
-    Optional<BookDetail> retrieveBookDetailByTitleAndIsbn(String title, String isbn10, String isbn13);
+    List<BookPersistenceEntity> retrieveBookInformationList(RetrieveBookRequestDto retrieveBookRequestDto);
 }

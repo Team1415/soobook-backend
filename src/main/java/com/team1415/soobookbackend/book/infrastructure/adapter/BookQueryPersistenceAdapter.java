@@ -1,9 +1,9 @@
 package com.team1415.soobookbackend.book.infrastructure.adapter;
 
-import com.team1415.soobookbackend.book.domain.Book;
 import com.team1415.soobookbackend.book.domain.BookDetail;
 import com.team1415.soobookbackend.book.domain.BookInformation;
 import com.team1415.soobookbackend.book.domain.port.BookStorageQueryPort;
+import com.team1415.soobookbackend.book.dto.RetrieveBookRequestDto;
 import com.team1415.soobookbackend.book.infrastructure.model.BookPersistenceEntity;
 import com.team1415.soobookbackend.book.infrastructure.model.mapper.BookPersistenceMapper;
 import com.team1415.soobookbackend.book.infrastructure.repository.BookDetailPersistenceRepository;
@@ -11,8 +11,8 @@ import com.team1415.soobookbackend.book.infrastructure.repository.BookPersistenc
 import com.team1415.soobookbackend.common.annotation.Adapter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.data.domain.Sort;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,13 +27,8 @@ public class BookQueryPersistenceAdapter implements BookStorageQueryPort {
     private final BookPersistenceMapper mapper;
 
     @Override
-    public List<Book> retrieveNewestBookList() {
-
-        return mapper.fromEntitysToDomainRoots(
-                bookPersistenceRepository.findAll(
-                        Sort.by(
-                                Sort.Direction.DESC,
-                                "bookPublishPersistenceEntity.publishDatetime")));
+    public List<BookInformation> retrieveBookList(RetrieveBookRequestDto retrieveBookRequestDto) {
+        return new ArrayList<>();
     }
 
     @Override
