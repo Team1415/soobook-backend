@@ -12,7 +12,8 @@ plugins {
 group = "com.team1415"
 version = "0.0.1-SNAPSHOT"
 
-val queryDslVersion = "5.0.0"
+val querydslVersion = "5.0.0"
+val jakartaApiVersion = "3.1.0"
 
 java {
   sourceCompatibility = JavaVersion.VERSION_17
@@ -47,13 +48,20 @@ dependencies {
   implementation("com.opencsv:opencsv:5.5")
   implementation("com.github.ozlerhakan:poiji:4.1.1")
 
-  implementation("com.querydsl:querydsl-jpa:${queryDslVersion}")
-  annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}")
+  // QueryDSL Implementation
+  implementation("com.querydsl:querydsl-jpa:${querydslVersion}:jakarta")
+  implementation("com.querydsl:querydsl-core:${querydslVersion}")
+  implementation("com.querydsl:querydsl-collections")
+  annotationProcessor("com.querydsl:querydsl-apt:${querydslVersion}:jakarta")
+  annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+  annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+  testImplementation("jakarta.persistence:jakarta.persistence-api")
+  testImplementation("com.querydsl:querydsl-jpa:${querydslVersion}")
 
   compileOnly("org.projectlombok:lombok")
-  annotationProcessor("org.projectlombok:lombok")
-
+  implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
   implementation("org.mapstruct:mapstruct:1.5.5.Final")
+  annotationProcessor("org.projectlombok:lombok")
   annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -82,8 +90,20 @@ tasks.asciidoctor {
   dependsOn(tasks.test)
 }
 
+val querydslDir = "src/main/generated"
+
+sourceSets {
+  getByName("main").java.srcDirs(querydslDir)
+}
+
 tasks.withType<JavaCompile> {
-  options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
+  options.generatedSourceOutputDirectory.set(file(querydslDir))
+}
+
+tasks.named("clean") {
+  doLast {
+    file(querydslDir).deleteRecursively()
+  }
 }
 
 flyway {
