@@ -36,7 +36,7 @@ public class JsonWebTokenJwtTokenAdapter implements JwtTokenPort {
     public String generateToken(JwtClaims jwtClaims) {
         return Jwts.builder()
             .setClaims(JsonWebTokenClaimsUtils.claimsFrom(jwtClaims))
-            .signWith(key)
+            .signWith(key, signatureAlgorithm)
             .compact();
     }
 
