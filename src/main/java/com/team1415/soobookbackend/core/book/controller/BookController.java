@@ -3,17 +3,17 @@ package com.team1415.soobookbackend.core.book.controller;
 import com.team1415.soobookbackend.core.book.application.BookCommandService;
 import com.team1415.soobookbackend.core.book.application.BookQueryService;
 import com.team1415.soobookbackend.core.book.dto.BookInformationResponseDto;
-import com.team1415.soobookbackend.core.book.dto.BookResponseDto;
-import com.team1415.soobookbackend.core.book.dto.RetrieveBookRequestDto;
 import com.team1415.soobookbackend.core.book.dto.SaveBookInformationRequestDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -23,12 +23,6 @@ public class BookController {
 
     private final BookQueryService bookQueryService;
     private final BookCommandService bookCommandService;
-
-    @GetMapping("/books")
-    public List<BookResponseDto> retrieveBookList(@ModelAttribute RetrieveBookRequestDto retrieveBookRequestDto) {
-
-        return new ArrayList<>();
-    }
 
     @PostMapping("/books")
     public List<BookInformationResponseDto> saveBookInformation(

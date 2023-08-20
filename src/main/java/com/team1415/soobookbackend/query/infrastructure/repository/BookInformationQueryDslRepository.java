@@ -1,12 +1,12 @@
-package com.team1415.soobookbackend.core.book.infrastructure.repository;
+package com.team1415.soobookbackend.query.infrastructure.repository;
 
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.team1415.soobookbackend.core.book.dto.RetrieveBookRequestDto;
-import com.team1415.soobookbackend.core.book.infrastructure.model.BookPersistenceEntity;
 import com.team1415.soobookbackend.common.constant.QueryIdentifier;
+import com.team1415.soobookbackend.core.book.infrastructure.model.BookPersistenceEntity;
+import com.team1415.soobookbackend.query.dto.RetrieveBookRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Repository;
@@ -14,23 +14,22 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.team1415.soobookbackend.book.infrastructure.model.QBookPersistenceEntity.bookPersistenceEntity;
-import static com.team1415.soobookbackend.book.infrastructure.model.QAuthorPersistenceEntity.authorPersistenceEntity;
-import static com.team1415.soobookbackend.book.infrastructure.model.QTranslatorPersistenceEntity.translatorPersistenceEntity;
+import static com.team1415.soobookbackend.core.book.infrastructure.model.QAuthorPersistenceEntity.authorPersistenceEntity;
+import static com.team1415.soobookbackend.core.book.infrastructure.model.QBookPersistenceEntity.bookPersistenceEntity;
+import static com.team1415.soobookbackend.core.book.infrastructure.model.QTranslatorPersistenceEntity.translatorPersistenceEntity;
 
 
 @Repository
 @RequiredArgsConstructor
-public class BookQueryDslRepositoryImpl implements BookQueryDslRepository {
+public class BookInformationQueryDslRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    @Override
-    public List<BookPersistenceEntity> retrieveBookInformationList(RetrieveBookRequestDto retrieveBookRequestDto) {
+    public List<BookPersistenceEntity> retrieveBookPersistenceEntityList(RetrieveBookRequestDto retrieveBookRequestDto) {
 
         return queryFactory.selectFrom(bookPersistenceEntity)
-                .innerJoin(bookPersistenceEntity.authorPersistenceEntitySet, authorPersistenceEntity)
-                .innerJoin(bookPersistenceEntity.translatorPersistenceEntitySet, translatorPersistenceEntity)
+                .innerJoin(bookPersistenceEntity.authorPersistenceEntitySet, authorPersistenceEntity).fetchJoin()
+                .innerJoin(bookPersistenceEntity.translatorPersistenceEntitySet, translatorPersistenceEntity).fetchJoin()
                 .where(dynamicConditionByRequestType(retrieveBookRequestDto.getType()),
                         bookIdEq(retrieveBookRequestDto.getBookId()))
                 .orderBy(dynamicOrderBySortOrder(retrieveBookRequestDto.getSort()))

@@ -1,9 +1,7 @@
-package com.team1415.soobookbackend.core.book.dto;
+package com.team1415.soobookbackend.query.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class RetrieveBookRequestDto {

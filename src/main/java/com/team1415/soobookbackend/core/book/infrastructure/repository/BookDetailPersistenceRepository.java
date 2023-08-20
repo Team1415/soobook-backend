@@ -10,6 +10,4 @@ import java.util.Optional;
 public interface BookDetailPersistenceRepository extends JpaRepository<BookDetailPersistenceEntity, Long> {
 
     Optional<BookDetailPersistenceEntity> findOneByBookIdAndSource(Long bookId, String source);
-    Optional<BookDetailPersistenceEntity> findOneByTitleAndIsbn10(String title, String isbn10);
-    Optional<BookDetailPersistenceEntity> findOneByTitleAndIsbn13(String title, String isbn13);
 }

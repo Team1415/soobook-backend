@@ -1,18 +1,16 @@
 package com.team1415.soobookbackend.core.book.infrastructure.adapter;
 
+import com.team1415.soobookbackend.common.annotation.Adapter;
 import com.team1415.soobookbackend.core.book.domain.BookDetail;
 import com.team1415.soobookbackend.core.book.domain.BookInformation;
 import com.team1415.soobookbackend.core.book.domain.port.BookStorageQueryPort;
-import com.team1415.soobookbackend.core.book.dto.RetrieveBookRequestDto;
 import com.team1415.soobookbackend.core.book.infrastructure.model.BookPersistenceEntity;
 import com.team1415.soobookbackend.core.book.infrastructure.model.mapper.BookPersistenceMapper;
 import com.team1415.soobookbackend.core.book.infrastructure.repository.BookDetailPersistenceRepository;
 import com.team1415.soobookbackend.core.book.infrastructure.repository.BookPersistenceRepository;
-import com.team1415.soobookbackend.common.annotation.Adapter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,11 +23,6 @@ public class BookQueryPersistenceAdapter implements BookStorageQueryPort {
     private final BookPersistenceRepository bookPersistenceRepository;
     private final BookDetailPersistenceRepository bookDetailPersistenceRepository;
     private final BookPersistenceMapper mapper;
-
-    @Override
-    public List<BookInformation> retrieveBookList(RetrieveBookRequestDto retrieveBookRequestDto) {
-        return new ArrayList<>();
-    }
 
     @Override
     public List<BookInformation> retrieveBookInformationListByIsbn10(List<String> isbn10List) {

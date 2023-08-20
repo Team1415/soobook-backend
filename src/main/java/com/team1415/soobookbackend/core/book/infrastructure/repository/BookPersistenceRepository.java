@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BookPersistenceRepository extends JpaRepository<BookPersistenceEntity, Long>, BookQueryDslRepository {
+public interface BookPersistenceRepository extends JpaRepository<BookPersistenceEntity, Long> {
 
     List<BookPersistenceEntity> findByIsbn10In(List<String> isbn10List);
     List<BookPersistenceEntity> findByIsbn13In(List<String> isbn13List);
