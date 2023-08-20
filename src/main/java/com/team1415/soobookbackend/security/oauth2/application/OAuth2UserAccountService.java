@@ -1,14 +1,14 @@
-package com.team1415.soobookbackend.security.application;
+package com.team1415.soobookbackend.security.oauth2.application;
 
 
 import com.team1415.soobookbackend.account.application.AccountCommandService;
 import com.team1415.soobookbackend.account.application.AccountQueryService;
 import com.team1415.soobookbackend.account.application.command.AccountCommand;
 import com.team1415.soobookbackend.account.domain.Account;
-import com.team1415.soobookbackend.security.domain.AccountContext;
-import com.team1415.soobookbackend.security.domain.OAuth2Account;
-import com.team1415.soobookbackend.security.domain.OAuth2Provider;
-import com.team1415.soobookbackend.security.domain.OAuth2UserAccount;
+import com.team1415.soobookbackend.security.oauth2.domain.account_context.AccountContext;
+import com.team1415.soobookbackend.security.oauth2.domain.OAuth2Account;
+import com.team1415.soobookbackend.security.oauth2.domain.oauth2_user_account.OAuth2Provider;
+import com.team1415.soobookbackend.security.oauth2.domain.oauth2_user_account.OAuth2UserAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;

@@ -1,6 +1,6 @@
 package com.team1415.soobookbackend.security.jwt.application;
 
-import com.team1415.soobookbackend.security.domain.AccountContext;
+import com.team1415.soobookbackend.security.oauth2.domain.account_context.AccountContext;
 import com.team1415.soobookbackend.security.jwt.domain.JwtClaims;
 import com.team1415.soobookbackend.security.jwt.domain.port.JwtTokenPort;
 import java.time.Duration;

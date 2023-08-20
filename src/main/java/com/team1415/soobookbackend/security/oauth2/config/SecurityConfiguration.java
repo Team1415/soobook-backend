@@ -1,8 +1,8 @@
-package com.team1415.soobookbackend.security.config;
+package com.team1415.soobookbackend.security.oauth2.config;
 
 import com.team1415.soobookbackend.account.application.AccountCommandService;
 import com.team1415.soobookbackend.account.application.AccountQueryService;
-import com.team1415.soobookbackend.security.application.OAuth2UserAccountService;
+import com.team1415.soobookbackend.security.oauth2.application.OAuth2UserAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;

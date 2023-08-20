@@ -1,4 +1,4 @@
-package com.team1415.soobookbackend.security.util;
+package com.team1415.soobookbackend.security.oauth2.util;
 
 import org.springframework.security.oauth2.core.user.OAuth2User;
 

@@ -4,8 +4,8 @@ import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.team1415.soobookbackend.account.domain.Account;
-import com.team1415.soobookbackend.security.domain.OAuth2UserAccount;
-import com.team1415.soobookbackend.security.domain.ProviderType;
+import com.team1415.soobookbackend.security.oauth2.domain.oauth2_user_account.OAuth2UserAccount;
+import com.team1415.soobookbackend.security.oauth2.domain.oauth2_user_account.ProviderType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

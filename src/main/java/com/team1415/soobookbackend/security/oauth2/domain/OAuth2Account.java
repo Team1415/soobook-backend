@@ -1,5 +1,6 @@
-package com.team1415.soobookbackend.security.domain;
+package com.team1415.soobookbackend.security.oauth2.domain;
 
+import com.team1415.soobookbackend.security.oauth2.domain.account_context.AccountContext;
 import lombok.experimental.Delegate;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 

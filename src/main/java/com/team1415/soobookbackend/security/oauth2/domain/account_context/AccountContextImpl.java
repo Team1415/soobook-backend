@@ -1,4 +1,4 @@
-package com.team1415.soobookbackend.security.domain;
+package com.team1415.soobookbackend.security.oauth2.domain.account_context;
 
 import com.team1415.soobookbackend.account.domain.Account;
 import com.team1415.soobookbackend.account.domain.Account.Provider;

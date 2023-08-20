@@ -1,8 +1,8 @@
 package com.team1415.soobookbackend.security.jwt.domain;
 
-import com.team1415.soobookbackend.security.domain.AccountContext;
-import com.team1415.soobookbackend.security.domain.AccountContextImpl;
-import com.team1415.soobookbackend.security.domain.AccountContextImpl.ProviderContextImpl;
+import com.team1415.soobookbackend.security.oauth2.domain.account_context.AccountContext;
+import com.team1415.soobookbackend.security.oauth2.domain.account_context.AccountContextImpl;
+import com.team1415.soobookbackend.security.oauth2.domain.account_context.AccountContextImpl.ProviderContextImpl;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.List;
