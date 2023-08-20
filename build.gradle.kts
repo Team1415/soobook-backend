@@ -59,9 +59,9 @@ dependencies {
   testImplementation("com.querydsl:querydsl-jpa:${querydslVersion}")
 
   compileOnly("org.projectlombok:lombok")
-  annotationProcessor("org.projectlombok:lombok")
-
+  implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
   implementation("org.mapstruct:mapstruct:1.5.5.Final")
+  annotationProcessor("org.projectlombok:lombok")
   annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
