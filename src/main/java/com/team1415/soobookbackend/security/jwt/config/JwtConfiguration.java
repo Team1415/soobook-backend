@@ -17,9 +17,11 @@ public class JwtConfiguration {
     private final JwtConfigurationProperties properties;
 
     @Bean
-    JwtClaimsService jwtClaimsService() {
+    JwtClaimsService jwtClaimsService(
+        JwtTokenPort jwtTokenPort
+    ) {
         return new JwtClaimsService(properties.getIssuer(), properties.getExpireDuration(),
-            jwtTokenPort());
+            jwtTokenPort);
     }
 
     @Bean
