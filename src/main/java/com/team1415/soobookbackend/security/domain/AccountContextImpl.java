@@ -7,18 +7,16 @@ public record AccountContextImpl(
     Long id,
     ProviderContextImpl provider,
     String email,
-    String displayName,
-    String firstName,
-    String lastName
+    String displayName
 
 ) implements AccountContext {
 
     public AccountContextImpl(Account account) {
         this(account.id(), new ProviderContextImpl(account.provider()), account.email(),
-            account.displayName(), account.firstName(), account.lastName());
+            account.displayName());
     }
 
-    record ProviderContextImpl(
+    public record ProviderContextImpl(
         String type
     ) implements ProviderContext {
 
