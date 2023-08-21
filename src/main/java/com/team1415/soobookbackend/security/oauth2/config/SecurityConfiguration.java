@@ -19,6 +19,7 @@ import org.springframework.security.config.annotation.web.configurers.FormLoginC
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
@@ -35,9 +36,11 @@ public class SecurityConfiguration {
 
     @Bean
     @Order(1)
-    SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain apiSecurityFilterChain(HttpSecurity http,
+        JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter) throws Exception {
         return http
             .securityMatcher(antMatcher("/api/**"))
+            .addFilterBefore(jwtAuthenticationTokenFilter, OAuth2LoginAuthenticationFilter.class)
             .csrf(CsrfConfigurer::disable)
             .httpBasic(HttpBasicConfigurer::disable)
             .formLogin(FormLoginConfigurer::disable)
@@ -70,6 +73,11 @@ public class SecurityConfiguration {
             accountCommandService,
             new DefaultOAuth2UserService()
         );
+    }
+
+    @Bean
+    JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
+        return new JwtAuthenticationTokenFilter(jwtClaimsService);
     }
 
     @Bean

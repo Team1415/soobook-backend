@@ -6,6 +6,9 @@ import com.team1415.soobookbackend.security.oauth2.domain.account_context.Accoun
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public record JwtClaims(
     String issuer,
@@ -29,6 +32,16 @@ public record JwtClaims(
     public AccountContext toContext() {
         return new AccountContextImpl(accountId, new ProviderContextImpl(provider), email,
             displayName);
+    }
+
+    public List<GrantedAuthority> authorities() {
+        if (roles.isEmpty()) {
+            return List.of();
+        }
+        return roles
+            .stream()
+            .map(SimpleGrantedAuthority::new)
+            .collect(Collectors.toList());
     }
 
     public static JwtClaims of(AccountContext accountContext, String issuer,

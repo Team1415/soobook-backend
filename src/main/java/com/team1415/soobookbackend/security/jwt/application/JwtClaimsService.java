@@ -16,17 +16,18 @@ public class JwtClaimsService {
 
     public String generateToken(AccountContext accountContext) {
         final JwtClaims jwtClaims = JwtClaims.of(accountContext, issuer, expireDuration, List.of());
-        return jwtTokenPort.generateToken(jwtClaims);
+        return generateToken(jwtClaims);
     }
 
-    public String refreashToken(String token) {
-        final JwtClaims jwtClaims = jwtTokenPort.parse(token);
-        final JwtClaims refreshed = jwtClaims.refresh(expireDuration);
-        return jwtTokenPort.generateToken(refreshed);
+    public String generateToken(JwtClaims claims) {
+        return jwtTokenPort.generateToken(claims);
     }
 
-    public AccountContext parse(String token) {
-        final JwtClaims jwtClaims = jwtTokenPort.parse(token);
-        return jwtClaims.toContext();
+    public JwtClaims refresh(JwtClaims claims) {
+        return claims.refresh(expireDuration);
+    }
+
+    public JwtClaims parse(String token) {
+        return jwtTokenPort.parse(token);
     }
 }
