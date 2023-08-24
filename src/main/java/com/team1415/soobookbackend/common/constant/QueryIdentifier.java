@@ -20,7 +20,8 @@ public class QueryIdentifier {
     @Getter
     @AllArgsConstructor
     public enum SortOrder {
-        NEW("new", "신간");
+        NEW("new", "신간"),
+        POPULAR("popular", "인기");
 
         private final String order;
         private final String orderName;
