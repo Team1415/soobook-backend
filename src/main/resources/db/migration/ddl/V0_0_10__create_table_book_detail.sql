@@ -5,5 +5,6 @@ CREATE TABLE book_detail (
   url VARCHAR(255) NOT NULL COMMENT '상세정보URL',
   book_index TEXT COMMENT '도서목차',
   created_at TIMESTAMP NOT NULL COMMENT '생성일시',
-  modified_at TIMESTAMP NOT NULL COMMENT '수정일시'
+  modified_at TIMESTAMP NOT NULL COMMENT '수정일시',
+  INDEX book_id (book_id)
 ) COMMENT '저자';

@@ -12,3 +12,5 @@ CREATE TABLE book (
   created_at TIMESTAMP NOT NULL COMMENT '생성일시',
   modified_at TIMESTAMP NOT NULL COMMENT '수정일시'
 ) COMMENT '도서';
+
+CREATE INDEX desc_publish_datetime ON book (publish_datetime DESC);
