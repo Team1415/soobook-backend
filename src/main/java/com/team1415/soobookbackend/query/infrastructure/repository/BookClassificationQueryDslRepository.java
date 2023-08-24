@@ -1,5 +1,6 @@
 package com.team1415.soobookbackend.query.infrastructure.repository;
 
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -47,6 +48,7 @@ public class BookClassificationQueryDslRepository {
                 .innerJoin(categoryPersistenceEntity)
                     .on(hashtagPersistenceEntity.categoryId.eq(categoryPersistenceEntity.id))
                 .where(hashtagCategoryIdEq(bookClassificationRequestDto.getCategoryId()))
+                .orderBy(dynamicOrderBySortOrder(bookClassificationRequestDto.getSort()))
                 .fetch();
     }
 
@@ -66,7 +68,12 @@ public class BookClassificationQueryDslRepository {
                     .on(hashtagPersistenceEntity.categoryId.eq(categoryPersistenceEntity.id))
                 .where(categoryPersistenceEntity.id.eq(categoryId))
                 .fetch();
-}
+    }
+
+    private OrderSpecifier[] dynamicOrderBySortOrder(String sort) {
+        // TODO 인기 분류 관련 로직 추가
+        return new OrderSpecifier[] {};
+    }
 
     private BooleanExpression hashtagCategoryIdEq(Long categoryId) {
         if (categoryId == null) {
