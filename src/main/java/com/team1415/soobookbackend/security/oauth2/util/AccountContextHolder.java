@@ -9,8 +9,9 @@ public class AccountContextHolder {
     public static AccountContext getOrEmpty() {
         final var context = SecurityContextHolder.getContext();
         final var authentication = context.getAuthentication();
-        if (authentication instanceof AccountContext) {
-            return (AccountContext) authentication;
+        final var principal = authentication.getPrincipal();
+        if (principal instanceof AccountContext) {
+            return (AccountContext) principal;
         } else {
             return null;
         }

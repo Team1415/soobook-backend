@@ -2,6 +2,7 @@ package com.team1415.soobookbackend.account.infrafstructure.adapter;
 
 import com.team1415.soobookbackend.account.domain.Account;
 import com.team1415.soobookbackend.account.domain.port.AccountQueryPort;
+import com.team1415.soobookbackend.account.infrafstructure.model.AccountPersistenceEntity;
 import com.team1415.soobookbackend.account.infrafstructure.repository.AccountPersistenceRepository;
 import com.team1415.soobookbackend.common.annotation.Adapter;
 import java.util.Optional;
@@ -15,6 +16,8 @@ public class AccountQueryAdapter implements AccountQueryPort {
 
     @Override
     public Optional<Account> findByEmail(String email) {
-        return Optional.empty();
+        return accountPersistenceRepository
+            .findByEmail(email)
+            .map(AccountPersistenceEntity::toDomain);
     }
 }

@@ -2,7 +2,6 @@ CREATE TABLE `account`
 (
     `id`            bigint       NOT NULL AUTO_INCREMENT COMMENT 'account id',
     `provider_type` VARCHAR(255) NOT NULL COMMENT 'provider type',
-    `provider_id`   VARCHAR(255) NOT NULL COMMENT 'provider id',
     `email`         VARCHAR(255) NOT NULL COMMENT 'email',
     `display_name`  VARCHAR(255) NOT NULL COMMENT 'display name',
     `first_name`    VARCHAR(255) NOT NULL COMMENT 'first name',

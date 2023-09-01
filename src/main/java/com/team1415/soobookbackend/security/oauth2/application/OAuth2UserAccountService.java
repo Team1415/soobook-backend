@@ -10,12 +10,14 @@ import com.team1415.soobookbackend.security.oauth2.domain.OAuth2Account;
 import com.team1415.soobookbackend.security.oauth2.domain.oauth2_user_account.OAuth2Provider;
 import com.team1415.soobookbackend.security.oauth2.domain.oauth2_user_account.OAuth2UserAccount;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+@Slf4j
 @RequiredArgsConstructor
 public class OAuth2UserAccountService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
@@ -31,6 +33,7 @@ public class OAuth2UserAccountService implements OAuth2UserService<OAuth2UserReq
         final var oAuth2UserAccount = OAuth2UserAccount.of(oAuth2Provider, oAuth2User);
 
         final var account = getOrCreateAccount(oAuth2UserAccount);
+
         return OAuth2Account.of(oAuth2User, AccountContext.from(account));
     }
 
