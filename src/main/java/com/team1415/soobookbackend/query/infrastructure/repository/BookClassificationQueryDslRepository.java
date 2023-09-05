@@ -3,6 +3,7 @@ package com.team1415.soobookbackend.query.infrastructure.repository;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.team1415.soobookbackend.query.dto.BookClassificationResponseDto;
 import com.team1415.soobookbackend.query.dto.CategoryInfomationResponseDto;
@@ -24,16 +25,15 @@ public class BookClassificationQueryDslRepository {
 
     private final JPAQueryFactory queryFactory;
 
+    public List<BookClassificationResponseDto> retrieveBookClassificationInformationListByBookId(Long bookId) {
+        return this.retrieveBookClassificationInformationSelectFromQuery()
+                .where(bookHashtagPersistenceEntity.bookId.eq(bookId))
+                .fetch();
+    }
+
     public List<BookClassificationResponseDto> retrieveBookClassificationInformationListByBookIdList(List<Long> bookIdList) {
 
-        return queryFactory.select(Projections.constructor(BookClassificationResponseDto.class,
-                        bookHashtagPersistenceEntity.bookId,
-                        Projections.constructor(HashtagInformationResponseDto.class,
-                                        bookHashtagPersistenceEntity.bookId,
-                                        hashtagPersistenceEntity.name)))
-                .from(bookHashtagPersistenceEntity)
-                .innerJoin(hashtagPersistenceEntity)
-                    .on(hashtagPersistenceEntity.id.eq(bookHashtagPersistenceEntity.hashtagId))
+        return this.retrieveBookClassificationInformationSelectFromQuery()
                 .where(bookHashtagPersistenceEntity.bookId.in(bookIdList))
                 .fetch();
     }
@@ -68,6 +68,18 @@ public class BookClassificationQueryDslRepository {
                     .on(hashtagPersistenceEntity.categoryId.eq(categoryPersistenceEntity.id))
                 .where(categoryPersistenceEntity.id.eq(categoryId))
                 .fetch();
+    }
+
+    private JPAQuery<BookClassificationResponseDto> retrieveBookClassificationInformationSelectFromQuery() {
+
+        return queryFactory.select(Projections.constructor(BookClassificationResponseDto.class,
+                        bookHashtagPersistenceEntity.bookId,
+                        Projections.constructor(HashtagInformationResponseDto.class,
+                                bookHashtagPersistenceEntity.bookId,
+                                hashtagPersistenceEntity.name)))
+                .from(bookHashtagPersistenceEntity)
+                .innerJoin(hashtagPersistenceEntity)
+                .on(hashtagPersistenceEntity.id.eq(bookHashtagPersistenceEntity.hashtagId));
     }
 
     private OrderSpecifier[] dynamicOrderBySortOrder(String sort) {
