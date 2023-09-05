@@ -1,6 +1,6 @@
 package com.team1415.soobookbackend.query.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.team1415.soobookbackend.core.book.infrastructure.model.AuthorPersistenceEntity;
 import com.team1415.soobookbackend.core.book.infrastructure.model.BookPersistenceEntity;
 import com.team1415.soobookbackend.core.book.infrastructure.model.BookPublishPersistenceEntity;
@@ -14,11 +14,14 @@ public class BookBriefInformationResponseDto {
 
     private Long id;
     private String title;
+    @JsonAlias(value = "authors")
     private List<String> authorList;
+    @JsonAlias(value = "translators")
     private List<String> translatorList;
     private String publisher;
+    @JsonAlias(value = "thumbnailUrl")
     private String thumbnail;
-    @JsonProperty("hashtags")
+    @JsonAlias(value = "hashtags")
     private List<HashtagInformationResponseDto> hashtagInformationList;
 
     public static BookBriefInformationResponseDto generateByEntityAndHashtag(
