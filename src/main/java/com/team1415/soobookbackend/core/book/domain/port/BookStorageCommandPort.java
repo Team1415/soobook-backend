@@ -8,6 +8,7 @@ import com.team1415.soobookbackend.common.annotation.Port;
 public interface BookStorageCommandPort {
 
     BookInformation insert(BookInformation bookInformation);
+    BookInformation insertImmediately(BookInformation bookInformation);
     BookInformation update(BookInformation bookInformation);
 
     BookDetail insertDetail(BookDetail bookDetail);

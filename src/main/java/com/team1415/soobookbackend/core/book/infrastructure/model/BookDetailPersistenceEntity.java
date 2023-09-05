@@ -24,6 +24,7 @@ public class BookDetailPersistenceEntity extends BasePersistenceEntity {
     private String source;
     private String url;
     private String bookIndex;
+    private String bookDescription;
 
 
     public static BookDetailPersistenceEntity create(BookDetail bookDetail) {
@@ -32,11 +33,13 @@ public class BookDetailPersistenceEntity extends BasePersistenceEntity {
                 .source(bookDetail.getSource())
                 .url(bookDetail.getUrl())
                 .bookIndex(bookDetail.getBookIndex())
+                .bookDescription(bookDetail.getBookDescription())
                 .build();
     }
 
     public void update(BookDetail bookDetail) {
         this.bookId = bookDetail.getBookId();
         this.bookIndex = bookDetail.getBookIndex();
+        this.bookDescription = bookDetail.getBookDescription();
     }
 }

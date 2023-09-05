@@ -70,7 +70,8 @@ public class BookCommandService {
                     if (StringUtils.isNoneEmpty(bookDetail.getExistIsbn(), bookDetail.getTitle())) {
                         return true;
                     } else {
-                        log.error("ISBN 데이터가 부정확한 도서가 존재합니다. 도서명 : {}, ISBN : {}", bookDetail.getTitle(), bookDetail.getExistIsbn());
+                        log.error("ISBN 데이터가 부정확한 도서가 존재합니다. 도서명 : {}, ISBN : {}", bookDetail.getTitle(),
+                                bookDetail.getExistIsbn());
                         return false;
                     }
                 })
@@ -90,7 +91,7 @@ public class BookCommandService {
                                 apiResponseBookInformation.getAuthorList(), apiResponseBookInformation.getTranslatorList()));
 
                 if (ObjectUtils.isEmpty(storageBookInformation.getBook().getId())) {
-                    storageBookInformation = bookStorageCommandPort.insert(apiResponseBookInformation);
+                    storageBookInformation = bookStorageCommandPort.insertImmediately(apiResponseBookInformation);
                 } else if (Boolean.FALSE.equals(apiResponseBookInformation.getBook().getBookPublish().publishDatetime()
                         .equals(storageBookInformation.getBook().getBookPublish().publishDatetime()))) {
                     storageBookInformation = bookStorageCommandPort.update(apiResponseBookInformation);
@@ -98,17 +99,14 @@ public class BookCommandService {
 
                 BookDetail storageBookDetail = bookStorageQueryPort.retrieveBookDetailByTitleAndIsbnAndUrl(
                         bookDetail.getTitle(), bookDetail.getIsbn10(), bookDetail.getIsbn13(), bookDetail.getUrl())
-                        .orElse(bookDetail);
+                        .orElseGet(() -> BookDetail.builder().build());
 
-                if (ObjectUtils.isEmpty(storageBookDetail.getBookId())) {
-                    bookDetail.updateBookId(storageBookInformation.getBook().getId());
+                bookDetail.updateBookId(storageBookInformation.getBook().getId());
+                if (ObjectUtils.isEmpty(storageBookDetail.getId())) {
                     bookStorageCommandPort.insertDetail(bookDetail);
                 } else {
-                    if (Boolean.FALSE.equals(StringUtils.equals(bookDetail.getUrl(), storageBookDetail.getUrl()))) {
-                        bookStorageCommandPort.insertDetail(bookDetail);
-                    } else {
-                        bookStorageCommandPort.updateDetail(bookDetail);
-                    }
+                    storageBookDetail.update(bookDetail);
+                    bookStorageCommandPort.updateDetail(storageBookDetail);
                 }
             } catch (NoSuchBookException e) {
                 log.error("Kakao Book Search API 조회결과가 존재하지 않습니다. 도서명 : {}", e.getMessage());
