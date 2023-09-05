@@ -2,6 +2,7 @@ package com.team1415.soobookbackend.query.application.service;
 
 import com.team1415.soobookbackend.query.application.port.BookInformationQueryPort;
 import com.team1415.soobookbackend.query.dto.BookBriefInformationResponseDto;
+import com.team1415.soobookbackend.query.dto.BookDetailInformationResponseDto;
 import com.team1415.soobookbackend.query.dto.RetrieveBookRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,10 @@ public class BookInformationQuerySerivce {
             RetrieveBookRequestDto retrieveBookRequestDto) {
 
         return bookInformationQueryPort.retrieveBookBriefInformationList(retrieveBookRequestDto);
+    }
+
+    public BookDetailInformationResponseDto retrieveBookDetailInformation(Long bookId) {
+
+        return bookInformationQueryPort.retrieveBookDetailInformation(bookId);
     }
 }

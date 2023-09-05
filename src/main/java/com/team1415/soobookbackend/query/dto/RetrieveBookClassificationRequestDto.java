@@ -1,14 +1,14 @@
 package com.team1415.soobookbackend.query.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 public class RetrieveBookClassificationRequestDto {
 
     private String sort;
-    @JsonAlias("category")
+    @JsonProperty("category")
     private Long categoryId;
-    @JsonAlias("hashtags")
+    @JsonProperty("hashtags")
     private Long[] hashtagIds;
 }
