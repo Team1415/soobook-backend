@@ -17,6 +17,8 @@ public class BookExcelModel {
     private String isbn;
     @ExcelCellName("Index")
     private String bookIndex;
+    @ExcelCellName("Contents")
+    private String bookDescription;
     @ExcelCellName("Url")
     private String bookDetailUrl;
 

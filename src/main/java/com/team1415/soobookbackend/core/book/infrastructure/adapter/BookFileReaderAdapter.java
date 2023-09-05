@@ -24,9 +24,12 @@ public class BookFileReaderAdapter implements BookFileQueryPort {
 
         try {
             List<BookExcelModel> bookExcelModelList = multipartFileConvertAdapter.toPojo(file, BookExcelModel.class);
-            return bookExcelModelList.stream().map(bookCsvModel ->
-                BookDetail.create(bookCsvModel.getIsbnType(), bookCsvModel.getIsbn(), bookCsvModel.getBookName(),
-                        bookCsvModel.getBookIndex(), bookCsvModel.getBookDetailUrl())).toList();
+
+            return bookExcelModelList.stream().map(bookExcelModel ->
+
+                    BookDetail.create(bookExcelModel.getIsbnType(), bookExcelModel.getIsbn(), bookExcelModel.getBookName(),
+                        bookExcelModel.getBookIndex(), bookExcelModel.getBookDescription(), bookExcelModel.getBookDetailUrl()
+                    )).toList();
         } catch (Exception e) {
             return new ArrayList<>();
         }

@@ -27,6 +27,12 @@ public class BookCommandPersistenceAdpater implements BookStorageCommandPort {
     }
 
     @Override
+    public BookInformation insertImmediately(BookInformation bookInformation) {
+        return bookPersistenceMapper.fromEntityToDomain(
+                bookPersistenceRepository.saveAndFlush(BookPersistenceEntity.create(bookInformation)));
+    }
+
+    @Override
     public BookInformation update(BookInformation bookInformation) {
         BookPersistenceEntity bookPersistenceEntity = bookPersistenceRepository.findById(bookInformation.getBook().getId())
                 .orElseThrow(NoResultException::new);

@@ -22,17 +22,30 @@ public class BookDetail {
     private String source;
     private String url;
     private String bookIndex;
+    private String bookDescription;
 
 
-    public static BookDetail create(String isbnType, String isbn, String title, String bookIndex, String url) {
+    public static BookDetail create(String isbnType, String isbn, String title, String bookIndex,
+                                    String bookDescription, String url) {
+
         BookDetail bookDetail = BookDetail.builder().title(title).source(BookDetailSource.getMatchedSourceByUrl(url))
-                .url(url).bookIndex(bookIndex).build();
+                .bookIndex(bookIndex).bookDescription(bookDescription).url(url).build();
         bookDetail.updateIsbn(isbnType, isbn);
         return bookDetail;
     }
 
     public void updateBookId(Long bookId) {
         this.bookId = bookId;
+    }
+    public void update(BookDetail bookDetail) {
+
+        this.isbn10 = bookDetail.getIsbn10();
+        this.isbn13 = bookDetail.getIsbn13();
+        this.title = bookDetail.getTitle();
+        this.source = bookDetail.getSource();
+        this.url = bookDetail.getUrl();
+        this.bookIndex = bookDetail.getBookIndex();
+        this.bookDescription = bookDetail.getBookDescription();
     }
 
     private void updateIsbn(String isbnType, String isbn) {
