@@ -1,20 +1,42 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/soobook-database?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
-    username: root
-    password: verysecret
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  profiles:
+    default: local
+    active: local
+    docker:
+      compose:
+        skip: true
+#    profiles:
+    include: API-KEY
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/soobook-database?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+#    username: root
+#    password: verysecret
+#
+#  flyway:
+#    enable: false
+#    url: jdbc:mysql://localhost:3306/soobook-database?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+#    user: root
+#    password: verysecret
+#
+#  cache:
+#    type: redis
+#    redis:
+#      time-to-live: 3600 # 데이터 유지 시간(sec)
+#      cache-null-values: true # null 캐싱 여부
+#      host: localhost
+#      port:
 
-  flyway:
-    enable: true
-    url: jdbc:mysql://localhost:3306/soobook-database?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
-    user: root
-    password: verysecret
-
-  cache:
-    type: redis
-    redis:
-      time-to-live: 3600 # 데이터 유지 시간(sec)
-      cache-null-values: true # null 캐싱 여부
-      host: localhost
-      port: 6379
