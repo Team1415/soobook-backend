@@ -12,6 +12,9 @@ plugins {
 group = "com.team1415"
 version = "0.0.1-SNAPSHOT"
 
+val querydslVersion = "5.0.0"
+val jakartaApiVersion = "3.1.0"
+
 java {
   sourceCompatibility = JavaVersion.VERSION_17
 }
@@ -25,7 +28,6 @@ configurations {
 repositories {
   mavenCentral()
 }
-
 
 val snippetsDir by extra { file("build/generated-snippets") }
 val jwtVersion by extra { "0.11.5" }
@@ -47,12 +49,32 @@ dependencies {
   implementation("org.mapstruct:mapstruct:1.5.5.Final")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
+  implementation("org.apache.commons:commons-csv:1.10.0")
+  implementation("org.apache.commons:commons-collections4:4.4")
+  implementation("commons-io:commons-io:2.13.0")
+  implementation("com.opencsv:opencsv:5.5")
+  implementation("com.github.ozlerhakan:poiji:4.1.1")
+
+  // QueryDSL Implementation
+  implementation("com.querydsl:querydsl-jpa:${querydslVersion}:jakarta")
+  implementation("com.querydsl:querydsl-core:${querydslVersion}")
+  implementation("com.querydsl:querydsl-collections")
+  annotationProcessor("com.querydsl:querydsl-apt:${querydslVersion}:jakarta")
+  annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+  annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+  testImplementation("jakarta.persistence:jakarta.persistence-api")
+  testImplementation("com.querydsl:querydsl-jpa:${querydslVersion}")
+
   compileOnly("org.projectlombok:lombok")
+  implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+  implementation("org.mapstruct:mapstruct:1.5.5.Final")
+  annotationProcessor("org.projectlombok:lombok")
+  annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+
+  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
   developmentOnly("org.springframework.boot:spring-boot-devtools")
   developmentOnly("org.springframework.boot:spring-boot-docker-compose")
   runtimeOnly("com.mysql:mysql-connector-j")
-  annotationProcessor("org.projectlombok:lombok")
-  annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.boot:spring-boot-testcontainers")
   testImplementation("io.projectreactor:reactor-test")
@@ -75,8 +97,20 @@ tasks.asciidoctor {
   dependsOn(tasks.test)
 }
 
+val querydslDir = "src/main/generated"
+
+sourceSets {
+  getByName("main").java.srcDirs(querydslDir)
+}
+
 tasks.withType<JavaCompile> {
-  options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
+  options.generatedSourceOutputDirectory.set(file(querydslDir))
+}
+
+tasks.named("clean") {
+  doLast {
+    file(querydslDir).deleteRecursively()
+  }
 }
 
 flyway {
