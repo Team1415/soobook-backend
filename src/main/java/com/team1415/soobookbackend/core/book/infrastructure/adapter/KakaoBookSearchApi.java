@@ -21,7 +21,7 @@ import java.util.Map;
 @Component
 public class KakaoBookSearchApi {
 
-    @Value("${KAKAO-API-KEY}")
+    @Value("${kakao.api.key}")
     String apiKey;
 
     private static final String URL = "https://dapi.kakao.com/v3/search/book";

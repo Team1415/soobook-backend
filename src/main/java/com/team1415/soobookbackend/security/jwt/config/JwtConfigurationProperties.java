@@ -4,7 +4,6 @@ import java.time.Duration;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.bind.ConstructorBinding;
 
 
 @Getter
@@ -16,8 +15,4 @@ public class JwtConfigurationProperties {
     private final Duration expireDuration;
     private final String clientSecret;
 
-    @ConstructorBinding
-    public JwtConfigurationProperties(String issuer, Long expireSeconds, String clientSecret) {
-        this(issuer, Duration.ofSeconds(expireSeconds), clientSecret);
-    }
 }

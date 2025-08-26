@@ -1,12 +1,9 @@
 plugins {
   java
-  id("org.springframework.boot") version "3.1.1"
-  id("io.spring.dependency-management") version "1.1.0"
-  id("org.graalvm.buildtools.native") version "0.9.23"
-  id("org.asciidoctor.jvm.convert") version "3.3.2"
-  id("org.flywaydb.flyway") version "9.20.0"
-  id("com.diffplug.spotless") version "6.19.0"
-  id("org.springdoc.openapi-gradle-plugin") version "1.6.0"
+  id("org.springframework.boot") version "3.5.4"
+  id("io.spring.dependency-management") version "1.1.7"
+  id("org.asciidoctor.jvm.convert") version "4.0.4"
+  id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
 }
 
 group = "com.team1415"
@@ -14,9 +11,13 @@ version = "0.0.1-SNAPSHOT"
 
 val querydslVersion = "5.0.0"
 val jakartaApiVersion = "3.1.0"
+extra["lombok.version"] = "1.18.38"
+
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(24))
+  }
 }
 
 configurations {
@@ -30,7 +31,7 @@ repositories {
 }
 
 val snippetsDir by extra { file("build/generated-snippets") }
-val jwtVersion by extra { "0.11.5" }
+val jwtVersion by extra { "0.13.0" }
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -41,19 +42,17 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.apache.kafka:kafka-streams")
-  implementation("org.flywaydb:flyway-core")
-  implementation("org.flywaydb:flyway-mysql")
   implementation ("io.jsonwebtoken:jjwt-api:$jwtVersion")
   runtimeOnly("io.jsonwebtoken:jjwt-impl:$jwtVersion")
   runtimeOnly("io.jsonwebtoken:jjwt-jackson:$jwtVersion")
-  implementation("org.mapstruct:mapstruct:1.5.5.Final")
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
-  implementation("org.apache.commons:commons-csv:1.10.0")
-  implementation("org.apache.commons:commons-collections4:4.4")
-  implementation("commons-io:commons-io:2.13.0")
-  implementation("com.opencsv:opencsv:5.5")
-  implementation("com.github.ozlerhakan:poiji:4.1.1")
+  implementation("org.mapstruct:mapstruct:1.6.3")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.8.8")
+  implementation("org.apache.commons:commons-csv:1.14.1")
+  implementation("org.apache.commons:commons-collections4:4.5.0")
+  implementation("commons-io:commons-io:2.20.0")
+  implementation("com.opencsv:opencsv:5.12.0")
+  implementation("com.github.ozlerhakan:poiji:4.9.0")
 
   // QueryDSL Implementation
   implementation("com.querydsl:querydsl-jpa:${querydslVersion}:jakarta")
@@ -67,25 +66,34 @@ dependencies {
 
   compileOnly("org.projectlombok:lombok")
   implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
-  implementation("org.mapstruct:mapstruct:1.5.5.Final")
+  implementation("org.mapstruct:mapstruct:1.6.3")
   annotationProcessor("org.projectlombok:lombok")
-  annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+  annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
 
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
   developmentOnly("org.springframework.boot:spring-boot-devtools")
-  developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-  runtimeOnly("com.mysql:mysql-connector-j")
+  runtimeOnly("com.h2database:h2")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
-  testImplementation("org.springframework.boot:spring-boot-testcontainers")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
-  testImplementation("org.testcontainers:junit-jupiter")
-  testImplementation("org.testcontainers:kafka")
-  testImplementation("org.testcontainers:mysql")
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.projectlombok" && requested.name == "lombok") {
+            useVersion("1.18.38")
+        }
+    }
+}
+
+tasks.withType<JavaCompile> {
+    options.annotationProcessorPath = configurations.annotationProcessor.get()
+    options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
 }
 
 tasks.withType<Test> {
-  useJUnitPlatform()
+    useJUnitPlatform()
+    systemProperties(System.getProperties().toMap() as Map<String, Any>)
 }
 
 tasks.test {
@@ -110,43 +118,5 @@ tasks.withType<JavaCompile> {
 tasks.named("clean") {
   doLast {
     file(querydslDir).deleteRecursively()
-  }
-}
-
-flyway {
-  url = "jdbc:mysql://localhost:3306/soobook-database?useSSL=false&allowPublicKeyRetrieval=true"
-  locations = arrayOf("filesystem:./src/main/resources/flyway/ddl", "filesystem:./src/main/resources/flyway/dml/local")
-  user = "root"
-  password = "verysecret"
-  schemas = arrayOf("soobook-database")
-  sqlMigrationSuffixes = arrayOf(".sql")
-  outOfOrder = true
-  baselineOnMigrate = true
-}
-
-spotless {
-  java {
-    importOrder("java", "jakarta", "javax", "org", "com", "common", "")
-    removeUnusedImports()
-
-    indentWithSpaces(4)
-    trimTrailingWhitespace()
-    endWithNewline()
-
-    googleJavaFormat().aosp()
-  }
-
-  format("misc") {
-    target("**/*.yml", "**/*.gradle", "**/*.md", "**/.gitignore")
-    indentWithSpaces(2)
-    trimTrailingWhitespace()
-    endWithNewline()
-  }
-
-  format("misc_gradle_kts") {
-    target("**/*.gradle.kts")
-    indentWithSpaces(2)
-    trimTrailingWhitespace()
-    endWithNewline()
   }
 }

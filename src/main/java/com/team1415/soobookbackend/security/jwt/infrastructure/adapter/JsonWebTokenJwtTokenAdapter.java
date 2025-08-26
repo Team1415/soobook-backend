@@ -10,13 +10,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import java.security.Key;
+import javax.crypto.SecretKey;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class JsonWebTokenJwtTokenAdapter implements JwtTokenPort {
 
-    private final Key key;
+    private final SecretKey key;
     private final SignatureAlgorithm signatureAlgorithm;
     private final JwtParser parser;
 
@@ -29,7 +29,7 @@ public class JsonWebTokenJwtTokenAdapter implements JwtTokenPort {
         this(Keys.hmacShaKeyFor(clientSecretDecoded), signatureAlgorithm);
     }
 
-    public JsonWebTokenJwtTokenAdapter(Key key, SignatureAlgorithm signatureAlgorithm) {
+    public JsonWebTokenJwtTokenAdapter(SecretKey key, SignatureAlgorithm signatureAlgorithm) {
         this(key, signatureAlgorithm, JwtTokenUtils.generateParserFrom(key));
     }
 

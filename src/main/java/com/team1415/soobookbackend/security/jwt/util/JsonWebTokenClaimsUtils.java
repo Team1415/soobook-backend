@@ -19,12 +19,16 @@ public class JsonWebTokenClaimsUtils {
     public static final String PROVIDER = "provider";
 
     public static Claims claimsFrom(JwtClaims jwtClaims) {
-        final Claims claims = Jwts.claims()
-            .setIssuer(jwtClaims.issuer())
-            .setExpiration(dateFrom(jwtClaims.expiration()))
-            .setIssuedAt(dateFrom(jwtClaims.issuedAt()));
-        setCustomFieldsToClaims(jwtClaims, claims);
-        return claims;
+        return Jwts.claims()
+            .issuer(jwtClaims.issuer())
+            .expiration(dateFrom(jwtClaims.expiration()))
+            .issuedAt(dateFrom(jwtClaims.issuedAt()))
+            .add(ACCOUNT_ID, jwtClaims.accountId())
+            .add(DISPLAY_NAME, jwtClaims.displayName())
+            .add(EMAIL, jwtClaims.email())
+            .add(ROLES, jwtClaims.roles())
+            .add(PROVIDER, jwtClaims.provider())
+            .build();
     }
 
     public static JwtClaims jwtClaimsFrom(Claims claims) {
@@ -41,24 +45,12 @@ public class JsonWebTokenClaimsUtils {
         return claims.get(ACCOUNT_ID, Long.class);
     }
 
-    private static void setAccountId(Claims claims, Long accountId) {
-        claims.put(ACCOUNT_ID, accountId);
-    }
-
     private static String getDisplayName(Claims claims) {
         return claims.get(DISPLAY_NAME, String.class);
     }
 
-    private static void setDisplayName(Claims claims, String displayName) {
-        claims.put(DISPLAY_NAME, displayName);
-    }
-
     private static String getEmail(Claims claims) {
         return claims.get(EMAIL, String.class);
-    }
-
-    private static void setEmail(Claims claims, String email) {
-        claims.put(EMAIL, email);
     }
 
     private static List<String> getRoles(Claims claims) {
@@ -66,25 +58,8 @@ public class JsonWebTokenClaimsUtils {
         return (List<String>) claims.get(ROLES, List.class);
     }
 
-    private static void setRoles(Claims claims, List<String> roles) {
-        claims.put(ROLES, roles);
-    }
-
     private static String getProvider(Claims claims) {
         return claims.get(PROVIDER, String.class);
-    }
-
-    private static void setProvider(Claims claims, String provider) {
-        claims.put(PROVIDER, provider);
-    }
-
-
-    private static void setCustomFieldsToClaims(JwtClaimsCustomFields customFields, Claims claims) {
-        setAccountId(claims, customFields.accountId());
-        setDisplayName(claims, customFields.displayName());
-        setEmail(claims, customFields.email());
-        setRoles(claims, customFields.roles());
-        setProvider(claims, customFields.provider());
     }
 
     private static ZonedDateTime zonedDateTimeFrom(Date date) {
