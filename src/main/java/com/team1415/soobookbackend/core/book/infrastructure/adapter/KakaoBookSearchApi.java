@@ -35,7 +35,7 @@ public class KakaoBookSearchApi {
         httpHeaders.set("Authorization", StringUtils.join("KakaoAK ", apiKey));
 
         UriComponentsBuilder builder =
-                UriComponentsBuilder.fromHttpUrl(URL).queryParam("query", encodedQuery);
+                UriComponentsBuilder.fromUriString(URL).queryParam("query", encodedQuery);
         HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
 
         var responseBody =

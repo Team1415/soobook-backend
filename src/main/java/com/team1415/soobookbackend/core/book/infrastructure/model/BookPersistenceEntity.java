@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Getter
 @SuperBuilder
 @Table(name = "book")
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED )
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BookPersistenceEntity extends BasePersistenceEntity {
 
@@ -31,7 +31,8 @@ public class BookPersistenceEntity extends BasePersistenceEntity {
     private String isbn10;
     private String isbn13;
     private String title;
-    @Embedded private BookPublishPersistenceEntity bookPublishPersistenceEntity;
+    @Embedded
+    private BookPublishPersistenceEntity bookPublishPersistenceEntity;
 
     @ManyToMany(
             fetch = FetchType.LAZY,

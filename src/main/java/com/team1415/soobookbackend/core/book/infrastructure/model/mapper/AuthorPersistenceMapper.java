@@ -2,6 +2,7 @@ package com.team1415.soobookbackend.core.book.infrastructure.model.mapper;
 
 import com.team1415.soobookbackend.core.book.domain.Author;
 import com.team1415.soobookbackend.core.book.infrastructure.model.AuthorPersistenceEntity;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 
@@ -15,5 +16,6 @@ public interface AuthorPersistenceMapper {
     Author fromEntityToDomain(AuthorPersistenceEntity authorPersistenceEntity);
 
     @Named(value = "authorList")
+    @IterableMapping(qualifiedByName = "author")
     List<Author> fromEntitysToDomains(Set<AuthorPersistenceEntity> authorPersistenceEntityList);
 }

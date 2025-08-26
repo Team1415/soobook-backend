@@ -61,3 +61,7 @@ jwt:
     clientSecret: BfqbCn6VnxW1UV1prH2qGvjq7hD9KzqpJExTFzmy77N6wp9wQtmUrT40CSawFFwnBW2q3dqrMi66eAgVKbxAyDEpqgxf2gGt59QL
     expireDuration: 1000s
     issuer: test
+
+kakao:
+  api:
+    key: dummy-key
