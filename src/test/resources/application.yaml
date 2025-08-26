@@ -9,6 +9,20 @@ spring:
       ddl-auto: create-drop
   flyway:
     enabled: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: dummy-client-id
+            client-secret: dummy-client-secret
+            scope: profile,email
 kakao:
   api:
     key: dummy-key
+
+jwt:
+  token:
+    clientSecret: BfqbCn6VnxW1UV1prH2qGvjq7hD9KzqpJExTFzmy77N6wp9wQtmUrT40CSawFFwnBW2q3dqrMi66eAgVKbxAyDEpqgxf2gGt59QL
+    expireDuration: 1000s
+    issuer: test
