@@ -18,8 +18,8 @@ spring:
     compose:
       skip: true
 
-#  flyway:
-#    enable: false
+  flyway:
+    enabled: false
 #    url: jdbc:mysql://localhost:3306/soobook-database?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
 #    user: root
 #    password: verysecret
