@@ -1,6 +1,34 @@
 # soobook-backend
 수북 Backend
 
+## Running the Application
+
+### Default Profile (H2 In-Memory Database)
+
+To run the application with the default profile, which uses an in-memory H2 database and does not require any external services, simply execute the following command:
+
+```bash
+./gradlew bootRun
+```
+
+### Local Profile (MySQL and Redis)
+
+The `local` profile is configured to work with the MySQL and Redis services defined in the `compose.yaml` file.
+
+1.  **Start the services:**
+    Make sure you have Docker installed, then run the following command to start the MySQL and Redis containers in the background.
+
+    ```bash
+    docker compose up -d
+    ```
+
+2.  **Run the application with the `local` profile:**
+    Use the following command to run the application and activate the `local` profile.
+
+    ```bash
+    ./gradlew bootRun --args='--spring.profiles.active=local'
+    ```
+
 ## 로컬에서 redis, mysql, adminer 실행
 
 ### docker-compose

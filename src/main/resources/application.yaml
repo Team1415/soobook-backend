@@ -1,40 +1,36 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/soobook-database?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
-    username: myuser
-    password: secret
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:testdb;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: validate # flyway를 사용하므로 validate로 변경
+      ddl-auto: update
     show-sql: true
   profiles:
-    default: local
-    active: local
+    active: default
   docker:
     compose:
-      enabled: true
-      lifecycle-management: start_and_stop
+      skip: true
 
-  flyway:
-    enabled: true
+#  flyway:
+#    enable: false
+#    url: jdbc:mysql://localhost:3306/soobook-database?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+#    user: root
+#    password: verysecret
 
-  cache:
-    type: redis
-    redis:
-      time-to-live: 3600 # 데이터 유지 시간(sec)
-      cache-null-values: true # null 캐싱 여부
-      host: localhost
-      port: 6379
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: dummy-client-id
-            client-secret: dummy-client-secret
-            scope: profile,email
+#  cache:
+#    type: redis
+#    redis:
+#      time-to-live: 3600 # 데이터 유지 시간(sec)
+#      cache-null-values: true # null 캐싱 여부
+#      host: localhost
+#      port: 6379
 
 logging:
   level:
